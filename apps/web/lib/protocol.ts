@@ -6,6 +6,8 @@ import { LANGS } from "./db/langs";
 export const KIND_CORRECTION = 4078;
 /** Attestation kind (parameterized replaceable, `d` = clip_id). */
 export const KIND_ATTESTATION = 30078;
+/** Claim request: content = the bolt11 to pay, signed by the worker (see lib/claim.ts). */
+export const KIND_CLAIM = 4079;
 export const MAX_TEXT = 500;
 
 export const ClipId = z.string().regex(/^[a-z0-9_-]{1,64}$/);

@@ -5,7 +5,9 @@ import { SECURITY_HEADERS } from "@sats/core/csp";
 
 // One .env.local at the monorepo root serves the app and the scripts.
 const ROOT = path.resolve(process.cwd(), "../..");
-loadEnvConfig(ROOT, process.env.NODE_ENV !== "production");
+// forceReload: Next has already called loadEnvConfig(apps/web) by now, and @next/env returns that
+// cached result (without the root file) unless forced.
+loadEnvConfig(ROOT, process.env.NODE_ENV !== "production", undefined, true);
 
 const nextConfig: NextConfig = {
   output: "standalone",

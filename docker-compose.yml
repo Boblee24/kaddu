@@ -22,7 +22,8 @@ services:
       POSTGRES_USER: sats
       POSTGRES_PASSWORD: sats
       POSTGRES_DB: sats
-    ports: ["5432:5432"]
+    # Host port 5433 so Kàddu can run beside other sats-starter apps (they use 5432).
+    ports: ["${DB_HOST_PORT:-5433}:5432"]
     volumes: ["dbdata:/var/lib/postgresql/data"]
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U sats -d sats"]

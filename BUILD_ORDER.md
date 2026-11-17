@@ -3,26 +3,26 @@
 Session B. Start: **Tue 12:30 WAT**. Tick the boxes as you go and keep every time box.
 
 ## Phase 1: Data + worker flow (Tue 12:30–17:00)
-- [ ] Rename to `kaddu`; Drizzle schema from CLAUDE.md + `@sats/payouts` tables; migrations; `docker compose --profile db up` works locally
-- [ ] Seed format: `seed/clips/<lang>/<id>.ogg` + `seed/manifest.json` (`[{ id, lang, file, truth_text, is_gold }]`). Loader script `pnpm seed:clips` → DB (audio as bytea, duration via `music-metadata`)
+- [x] Rename to `kaddu`; Drizzle schema from CLAUDE.md + `@sats/payouts` tables; migrations; `docker compose --profile db up` works locally
+- [x] Seed format: `seed/clips/<lang>/<id>.ogg` + `seed/manifest.json` (`[{ id, lang, file, truth_text, is_gold }]`). Loader script `pnpm seed:clips` → DB (audio as bytea, duration via `music-metadata`)
 - [ ] HUMAN TODO (seed audio):
   - [ ] **Wolof:** run `scripts/fetch_wolof.py` (write it: Hugging Face `galsenai/wolof-audio-data`. **Check the dataset licence on its HF page first** and record it in `seed/LICENSES.md`. Take ≤40 clips of 3–10 s with their transcripts and convert to 16 kHz mono Opus)
   - [ ] **Yoruba + Pidgin:** friends record about 20 clips each (4–8 s, everyday sentences of their own) and **type exactly what they said** (with tone marks if they can). Convert: `ffmpeg -i in.m4a -ac 1 -ar 16000 -c:a libopus -b:a 16k out.ogg`. Get their consent in writing (a WhatsApp message is fine) covering: the clips go into an open CC-BY-4.0 dataset and are processed by AI services (Google Gemini, Spitch). List contributors in `seed/LICENSES.md`
   - [ ] Mark about 25% of the clips per language `is_gold: true`
-- [ ] Worker identity: `@sats/nostr.getOrCreateKey()`, backup prompt, consent screen
-- [ ] `GET /api/next?lang=` → the next clip for this pubkey (first 2 = gold, then random open clips the worker hasn't done; ~25% gold mixed in). **Never return `truth_text` or `is_gold`.**
-- [ ] `/work` UI: play/replay/0.75×, editable draft (large font, diacritic-friendly input), "Draft is correct" button, Submit → signed event → `POST /api/corrections`
-- [ ] Store corrections (decision `pending`)
+- [x] Worker identity: `@sats/nostr.getOrCreateKey()`, backup prompt, consent screen
+- [x] `GET /api/next?lang=` → the next clip for this pubkey (first 2 = gold, then random open clips the worker hasn't done; ~25% gold mixed in). **Never return `truth_text` or `is_gold`.**
+- [x] `/work` UI: play/replay/0.75×, editable draft (large font, diacritic-friendly input), "Draft is correct" button, Submit → signed event → `POST /api/corrections`
+- [x] Store corrections (decision `pending`)
 
 ## Phase 2: Scoring, consensus, payouts (Tue 17:00–23:00)
-- [ ] `lib/text.ts`: `normalize`, `stripDiacritics`, `cer`, `wer` (Levenshtein, char- and word-level) + **thorough tests** (Yoruba/Wolof diacritics, empty strings, punctuation)
-- [ ] Deterministic checks (CLAUDE.md step 2) + tests
-- [ ] Gold scoring + worker stats + qualification gate
-- [ ] Consensus engine (k=3, CER ≤ 0.15, medoid, disputed) + tests
-- [ ] Payout eligibility → `accrue`; price table
-- [ ] `/wallet`: WalletPanel + claimable balance + **auto-claim**: when the worker's own wallet is connected and claimable > 0, the client makes an invoice for exactly the claimable amount → `POST /api/claim` → `@sats/payouts.claim`
-- [ ] Attestation event on `done` (server key) + best-effort publish
-- [ ] `scripts/personas.ts`: 3 scripted personas (from faucet wallets `persona1–3`) pre-submit 2 corrections per non-gold clip (persona1 = truth; persona2 = truth with 1–2 typos; persona3 = sometimes a lazy paste-back), so the **live worker's submission is the 3rd and consensus forms instantly** in the demo
+- [x] `lib/text.ts`: `normalize`, `stripDiacritics`, `cer`, `wer` (Levenshtein, char- and word-level) + **thorough tests** (Yoruba/Wolof diacritics, empty strings, punctuation)
+- [x] Deterministic checks (CLAUDE.md step 2) + tests
+- [x] Gold scoring + worker stats + qualification gate
+- [x] Consensus engine (k=3, CER ≤ 0.15, medoid, disputed) + tests
+- [x] Payout eligibility → `accrue`; price table
+- [x] `/wallet`: WalletPanel + claimable balance + **auto-claim**: when the worker's own wallet is connected and claimable > 0, the client makes an invoice for exactly the claimable amount → `POST /api/claim` → `@sats/payouts.claim`
+- [x] Attestation event on `done` (server key) + best-effort publish
+- [x] `scripts/personas.ts`: 3 scripted personas (from faucet wallets `persona1–3`) pre-submit 2 corrections per non-gold clip (persona1 = truth; persona2 = truth with 1–2 typos; persona3 = sometimes a lazy paste-back), so the **live worker's submission is the 3rd and consensus forms instantly** in the demo
 - [ ] HUMAN TODO: faucet wallets `sponsor`, `persona1–3`, `live-worker`; put `SPONSOR_NWC_URL` in `.env.local`
 - [ ] **Checkpoint (23:00):** the live worker corrects a clip on a phone → consensus → sats arrive in the worker's wallet
 

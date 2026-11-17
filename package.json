@@ -19,7 +19,8 @@
     "nwc:latency": "tsx scripts/nwc-latency.ts",
     "seed": "tsx scripts/seed.ts",
     "demo": "pnpm install && tsx scripts/demo.ts",
-    "seed:clips": "tsx scripts/seed-clips.ts"
+    "seed:clips": "tsx scripts/seed-clips.ts",
+    "personas": "tsx scripts/personas.ts"
   },
   "devDependencies": {
     "@types/node": "^24.19.2",

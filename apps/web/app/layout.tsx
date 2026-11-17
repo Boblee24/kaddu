@@ -4,8 +4,8 @@ import { Shell } from "./shell";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "sats-starter",
-  description: "Lightning wallet starter for African builders: NWC, Nostr, AI.",
+  title: "Kàddu",
+  description: "Fix AI transcripts of Wolof, Yorùbá and Pidgin. Get paid in sats.",
   icons: { icon: "/icon.svg" },
 };
 

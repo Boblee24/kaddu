@@ -1,5 +1,5 @@
 {
-  "name": "sats-starter",
+  "name": "kaddu",
   "private": true,
   "type": "module",
   "packageManager": "pnpm@10.34.9",
@@ -18,7 +18,8 @@
     "nwc:probe": "tsx scripts/nwc-probe.ts",
     "nwc:latency": "tsx scripts/nwc-latency.ts",
     "seed": "tsx scripts/seed.ts",
-    "demo": "pnpm install && tsx scripts/demo.ts"
+    "demo": "pnpm install && tsx scripts/demo.ts",
+    "seed:clips": "tsx scripts/seed-clips.ts"
   },
   "devDependencies": {
     "@types/node": "^24.19.2",

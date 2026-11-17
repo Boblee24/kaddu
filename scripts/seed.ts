@@ -1,6 +1,8 @@
 /**
- * pnpm seed: load demo data. The starter has none; each app replaces this
- * (Kàddu: clips + drafts + personas; NdoxWatch: zones + flood mask + personas).
- * Must be idempotent: `pnpm demo` runs it on every start.
+ * pnpm seed: everything the demo needs (idempotent; `pnpm demo` runs it on every start).
+ * Kàddu: migrate + clips (+ drafts from seed/drafts.json). Personas are added in Phase 2.
  */
-console.log("✓ seed: nothing to seed in sats-starter");
+import { spawnSync } from "node:child_process";
+
+const r = spawnSync("pnpm", ["exec", "tsx", "scripts/seed-clips.ts"], { stdio: "inherit", shell: process.platform === "win32" });
+process.exit(r.status ?? 1);

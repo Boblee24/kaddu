@@ -2,9 +2,9 @@ import type { MetadataRoute } from "next";
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: "sats-starter",
-    short_name: "sats",
-    description: "Lightning wallet starter",
+    name: "Kàddu",
+    short_name: "Kàddu",
+    description: "Fix AI transcripts, get paid in sats",
     start_url: "/",
     display: "standalone",
     background_color: "#f7f5f0",

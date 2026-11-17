@@ -3,6 +3,7 @@ import { serverEnv } from "@sats/core/env";
 import { errorCode } from "@sats/core/errors";
 import { publishBestEffort } from "@sats/nostr";
 import { scoreCorrection } from "@/lib/score";
+import { getJudge } from "@/lib/judge";
 import { log } from "@sats/core/log";
 import { getDb } from "@/lib/db";
 import { storeCorrection } from "@/lib/corrections";
@@ -32,7 +33,7 @@ export async function POST(req: Request) {
       return json({ ok: false, code: r.code }, r.code === "REPLAY" || r.code === "ALREADY_DONE" ? 409 : 400);
     }
     const env = serverEnv();
-    const out = await scoreCorrection(getDb(), r.correction, { serverNsec: env.SERVER_NOSTR_NSEC });
+    const out = await scoreCorrection(getDb(), r.correction, { serverNsec: env.SERVER_NOSTR_NSEC, judge: getJudge() });
     log.info("correction.scored", { id: r.correction.id, status: out.decision, code: out.code ?? "none", count: out.sats });
     const attestation = out.attestation;
     if (attestation && env.NOSTR_RELAYS.length > 0) {

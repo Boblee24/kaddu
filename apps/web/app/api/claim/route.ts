@@ -4,6 +4,7 @@ import { claim } from "@sats/payouts";
 import { getDb } from "@/lib/db";
 import { verifyClaimEvent } from "@/lib/claim";
 import { getSponsor } from "@/lib/sponsor";
+import { isPaused } from "@/lib/sponsorOps";
 import { json, rateLimited } from "@/lib/http";
 
 export const dynamic = "force-dynamic";
@@ -26,6 +27,7 @@ export async function POST(req: Request) {
   const v = verifyClaimEvent((body as { event?: unknown } | null)?.event, Math.floor(Date.now() / 1000));
   if (!v.ok) return json({ status: "rejected", code: v.code }, 400);
   try {
+    if (await isPaused(getDb())) return json({ status: "rejected", code: "PAUSED" }, 503);
     const { wallet, limits } = await getSponsor();
     const r = await claim(getDb(), wallet, { pubkey: v.pubkey, bolt11: v.bolt11, limits });
     if (r.status === "rejected") log.info("claim.rejected", { code: r.code });

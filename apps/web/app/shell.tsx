@@ -24,6 +24,9 @@ export function Shell({ children, demo }: { children: ReactNode; demo: boolean; 
           ⚡ Kàddu
         </Link>
         <nav className="flex items-center gap-3">
+          <Link href="/scoreboard" className="font-medium underline-offset-4 hover:underline">
+            Scores
+          </Link>
           <Link href="/wallet" className="font-medium underline-offset-4 hover:underline">
             Wallet
           </Link>

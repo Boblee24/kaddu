@@ -65,7 +65,7 @@ async function setDecision(db: Db | Tx, id: string, decision: Decision, rejectCo
  * Pay an accepted correction if the worker is eligible: gold accuracy ≥ 0.7 and under the daily cap.
  * Returns the sats accrued (0 if ineligible). Idempotent via accrue's sourceId.
  */
-async function payIfEligible(tx: Tx, o: { correctionId: string; pubkey: string; sats: number; now: Date }): Promise<{ sats: number; reason?: string }> {
+export async function payIfEligible(tx: Tx, o: { correctionId: string; pubkey: string; sats: number; now: Date }): Promise<{ sats: number; reason?: string }> {
   const day = utcDay(o.now);
   const [w] = await tx.select().from(workers).where(eq(workers.pubkey, o.pubkey)).for("update");
   if (!w) return { sats: 0, reason: "no_worker" };
@@ -188,4 +188,36 @@ export async function scoreCorrection(db: Db, c: StoredCorrection, o: ScoreOpts 
     return mine;
   });
   return result;
+}
+
+/**
+ * Sponsor review of a disputed clip: the chosen correction becomes the consensus. Its author is paid
+ * (subject to the same eligibility rules); the others are rejected. Idempotent per clip.
+ */
+export async function resolveDisputed(
+  db: Db,
+  o: { clipId: string; correctionId: string; serverNsec?: string; now?: Date },
+): Promise<{ ok: true; attestation?: NostrEvent } | { ok: false; code: "NOT_DISPUTED" | "UNKNOWN_CORRECTION" }> {
+  const now = o.now ?? new Date();
+  return db.transaction(async (tx) => {
+    const [clip] = await tx.select().from(clips).where(eq(clips.id, o.clipId)).for("update");
+    if (!clip || clip.status !== "disputed") return { ok: false as const, code: "NOT_DISPUTED" as const };
+    const rows = await tx
+      .select({ id: corrections.id, text: corrections.text, pubkey: corrections.workerPubkey })
+      .from(corrections)
+      .where(and(eq(corrections.clipId, clip.id), eq(corrections.decision, "pending")));
+    const chosen = rows.find((r) => r.id === o.correctionId);
+    if (!chosen) return { ok: false as const, code: "UNKNOWN_CORRECTION" as const };
+    for (const r of rows) {
+      if (r.id === chosen.id) {
+        await setDecision(tx, r.id, "accepted", "sponsor_review");
+        await payIfEligible(tx, { correctionId: r.id, pubkey: r.pubkey, sats: clip.priceSats, now });
+      } else await setDecision(tx, r.id, "rejected", "disagree");
+    }
+    await tx.update(clips).set({ status: "done", consensusText: chosen.text }).where(eq(clips.id, clip.id));
+    if (!o.serverNsec) return { ok: true as const };
+    const ev = attestationEvent({ clipId: clip.id, lang: clip.lang, consensusText: chosen.text, contributors: [chosen.pubkey], nsec: o.serverNsec, now });
+    await tx.insert(attestations).values({ clipId: clip.id, eventId: ev.id, event: ev as unknown as Record<string, unknown> }).onConflictDoNothing();
+    return { ok: true as const, attestation: ev };
+  });
 }

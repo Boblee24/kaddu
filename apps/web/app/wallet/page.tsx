@@ -15,6 +15,7 @@ const CLAIM_TEXT: Record<string, string> = {
   OVER_MAX_CLAIM: "That's more than one claim allows. Try again for a smaller amount.",
   PAY_FAILED: "The payment failed. Your sats are saved; try again later.",
   RATE_LIMITED: "Too many tries. Wait a minute.",
+  PAUSED: "The sponsor paused payouts for now; your sats are saved and you can claim later.",
 };
 
 function ClaimBox({ wallet, info, refresh }: { wallet: Wallet; info: WalletInfo; refresh: () => void }) {

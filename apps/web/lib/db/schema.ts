@@ -76,6 +76,13 @@ export const attestations = pgTable("attestations", {
   createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
 });
 
+/** App settings (sponsor pause switch). */
+export const settings = pgTable("settings", {
+  key: text("key").primaryKey(),
+  value: text("value").notNull(),
+  updatedAt: timestamp("updated_at", { withTimezone: true }).notNull().defaultNow(),
+});
+
 /** Idempotent DDL matching the tables above. Tests run every query against it. */
 export const KADDU_SQL = `
 CREATE TABLE IF NOT EXISTS clips (
@@ -120,6 +127,12 @@ CREATE TABLE IF NOT EXISTS workers (
   gold_correct integer NOT NULL DEFAULT 0,
   accepted_today integer NOT NULL DEFAULT 0,
   day text NOT NULL DEFAULT ''
+);
+
+CREATE TABLE IF NOT EXISTS settings (
+  key text PRIMARY KEY,
+  value text NOT NULL,
+  updated_at timestamptz NOT NULL DEFAULT now()
 );
 
 CREATE TABLE IF NOT EXISTS attestations (

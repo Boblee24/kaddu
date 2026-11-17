@@ -26,5 +26,5 @@ export type ClipTask = {
 };
 
 export type SubmitResult =
-  | { ok: true; correctionId: string; decision: "pending" | "accepted" | "rejected"; code?: string; sats?: number; consensus?: boolean }
+  | { ok: true; correctionId: string; decision: "pending" | "accepted" | "rejected"; code?: string; sats?: number; consensus?: boolean; attestationId?: string }
   | { ok: false; code: string };

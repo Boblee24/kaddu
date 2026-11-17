@@ -6,6 +6,7 @@ import { verifyEvent, tagValue } from "@sats/nostr";
 import type { Db } from "@sats/payouts";
 import { clips, corrections } from "./db/schema";
 import { CorrectionContent, KIND_CORRECTION } from "./protocol";
+import { ensureWorker } from "./assign";
 
 /** Offline queue (Phase 5) sends corrections late; replay defence is the UNIQUE event_id, not this window. */
 export const MAX_AGE_SEC = 6 * 3600;
@@ -59,6 +60,7 @@ export async function storeCorrection(
   const [clip] = await db.select({ status: clips.status }).from(clips).where(eq(clips.id, v.clipId));
   if (!clip) return { ok: false, code: "UNKNOWN_CLIP" };
   if (clip.status !== "open") return { ok: false, code: "CLIP_CLOSED" };
+  await ensureWorker(db, v.pubkey);
 
   const inserted = await db
     .insert(corrections)

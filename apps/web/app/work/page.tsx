@@ -24,7 +24,28 @@ const MESSAGES: Record<string, string> = {
   STALE: "This correction is too old. Try the next clip.",
   RATE_LIMITED: "Slow down a little and try again.",
   OFFLINE: "No connection. Try again.",
+  // Why a correction wasn't accepted or paid (codes from lib/score.ts).
+  disagree: "Other speakers heard something different.",
+  disputed: "Speakers disagree on this clip. A reviewer will decide.",
+  gold_mismatch: "That doesn't match what was said. Listen again carefully on the next one.",
+  low_gold_accuracy: "Accepted, but your accuracy is too low to be paid yet. Keep practising!",
+  daily_cap: "Accepted. You reached today's limit; come back tomorrow.",
+  empty: "Please type what you hear.",
+  implausible_length: "That's too short or too long for this clip.",
+  digits_only: "Please type the words you hear.",
+  url: "Links aren't allowed.",
+  emoji: "Emoji aren't allowed.",
+  wrong_script: "Please type in Latin letters.",
+  copy_other_clip: "That's the text of a different clip.",
+  injection: "Flagged: this looks like instructions, not speech.",
+  gibberish: "Flagged: this doesn't look like real words.",
+  wrong_language: "Flagged: this doesn't look like the clip's language.",
 };
+
+function resultLine(r: Extract<SubmitResult, { ok: true }>): string {
+  if (r.code && MESSAGES[r.code]) return MESSAGES[r.code]!;
+  return MESSAGES[r.decision] ?? "";
+}
 
 function Work() {
   const params = useSearchParams();
@@ -166,7 +187,10 @@ function Work() {
               {phase.r.decision === "accepted" && phase.r.sats ? (
                 <p className="text-3xl font-bold text-[var(--ok)]">+{phase.r.sats} sats ⚡</p>
               ) : null}
-              <p className="text-xl font-semibold">{MESSAGES[phase.r.decision]}</p>
+              <p className="text-xl font-semibold">{resultLine(phase.r)}</p>
+              {phase.r.attestationId && (
+                <p className="break-all text-xs text-[var(--muted)]">Signed attestation: {phase.r.attestationId}</p>
+              )}
             </>
           ) : (
             <p className="text-xl font-semibold">{MESSAGES[phase.r.code] ?? "Could not submit."}</p>

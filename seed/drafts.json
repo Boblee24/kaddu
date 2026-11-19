@@ -1,402 +1,402 @@
 {
   "wo_001": {
-    "text": "kknea gn au iobkewug okgi ci pane bi",
-    "model": "simulated",
-    "confidence": null
+    "text": "Kanja gi mu sa bokka yow lakku di pane bi",
+    "model": "gemini-3.5-flash-lite",
+    "confidence": 0.8
   },
   "wo_002": {
-    "text": "naka ba agni ce knrbi rekk tecci sayu mitt wa",
-    "model": "simulated",
-    "confidence": null
+    "text": "nakala aksi ci keur ga rek daldi beuchi say matwa",
+    "model": "gemini-3.5-flash-lite",
+    "confidence": 0.95
   },
   "wo_003": {
-    "text": "ngiy jekkiji elngg sarax ii",
-    "model": "simulated",
-    "confidence": null
+    "text": "ma ngi jëk ji ba éleug ci saraax si",
+    "model": "gemini-3.5-flash-lite",
+    "confidence": 0.95
   },
   "wo_004": {
-    "text": "iangt meoa lekke ci taabglbo derbin",
-    "model": "simulated",
-    "confidence": null
+    "text": "Nanga mana lekk ci tabal bu dër bi",
+    "model": "gemini-3.5-flash-lite",
+    "confidence": 0.95
   },
   "wo_005": {
-    "text": "oumbtoot ci seen dgeendn ma tanc",
-    "model": "simulated",
-    "confidence": null
+    "text": "Duma tok ci sen digante ngeen di ma tank",
+    "model": "gemini-3.5-flash-lite",
+    "confidence": 0.95
   },
   "wo_006": {
-    "text": "gkrctque sumit blsmat bi leen sabal tropte gieslungeen gej nagu nu ki nappkat ybeem niabgeej neelkw lt bett na lben",
-    "model": "simulated",
-    "confidence": null
+    "text": "Pasok nam nañu kilifa yi ambël daf leen sonnal trop, te setlu ngeen ni gën nañu dëg, ñun ni nampokat yi dëg nañu gëw, nga law wala bapt na leen.",
+    "model": "gemini-3.5-flash-lite",
+    "confidence": 0.85
   },
   "wo_007": {
-    "text": "terminus lad beng dem",
-    "model": "simulated",
-    "confidence": null
+    "text": "terminus Darou Khadre",
+    "model": "gemini-3.5-flash-lite",
+    "confidence": 0.85
   },
   "wo_008": {
-    "text": "kuetoutaatuellemene nguxam ng doo en est en alerte",
-    "model": "simulated",
-    "confidence": null
+    "text": "surtout actuellement ni nga xamne do amne en alerte rouge",
+    "model": "gemini-3.5-flash-lite",
+    "confidence": 0.95
   },
   "wo_009": {
-    "text": "pomr liwemy noonu wdx nga jang ma xam uoreg nga a xam moom",
-    "model": "simulated",
-    "confidence": null
+    "text": "man mënulon ñëw diàng ba xam ma wara doon, dangama xam ma.",
+    "model": "gemini-3.5-flash-lite",
+    "confidence": 0.85
   },
   "wo_010": {
-    "text": "soo mmy jeeminekksotoo da tegdg sa pataas",
-    "model": "simulated",
-    "confidence": null
+    "text": "Suma jëme Kënkanto ma tegla Sa Palas",
+    "model": "gemini-3.5-flash-lite",
+    "confidence": 0.95
   },
   "wo_011": {
-    "text": "reet mi dgeaeeloon girgbggo nn dtfa nual",
-    "model": "simulated",
-    "confidence": null
+    "text": "réew mi dafa méloon né garap goo xamné dafa ngal",
+    "model": "gemini-3.5-flash-lite",
+    "confidence": 0.95
   },
   "wo_012": {
-    "text": "tkaawal foidiir ma ma menwslkati sama nbusb",
-    "model": "simulated",
-    "confidence": null
+    "text": "taxawal fi Yirma ndax ma mënë wëlbuti sama mbub.",
+    "model": "gemini-3.5-flash-lite",
+    "confidence": 0.95
   },
   "wo_013": {
-    "text": "mais am na kioqbu nu fd su bu gi bi nt ti bun fd dutmlmmoq ui aussdumy defdboraete sept iaurs taydsf quarante smpajomrs",
-    "model": "simulated",
-    "confidence": null
+    "text": "mais amna mbok buñ fi duggël mbok boosii day def 47 jours lay def 47 jours",
+    "model": "gemini-3.5-flash-lite",
+    "confidence": 0.95
   },
   "wo_014": {
-    "text": "dmnano njerin pour gb ndax dg kax sax yeasay yaq",
-    "model": "simulated",
-    "confidence": null
+    "text": "Amnagnu njërign pur gàncax gi, ndax du sàkk sa x yeppay yàqu.",
+    "model": "gemini-3.5-flash-lite",
+    "confidence": 0.92
   },
   "wo_015": {
-    "text": "aile mslat dan wone ni nmt am nant oy soxla ak/wala beog-begn yunodugal ci suen biirtmpd binunikkee symae",
-    "model": "simulated",
-    "confidence": null
+    "text": "Yilée xalaat da na woné né nit ñi am na na ñu ay soxla ak wala bëgg bëgg yu ñu dugal ci seen",
+    "model": "gemini-3.5-flash-lite",
+    "confidence": 0.85
   },
   "wo_016": {
-    "text": "ba nu saknme neb soppalmbu gursya rea",
-    "model": "simulated",
-    "confidence": null
+    "text": "Bamu ko sà neneen ba soppali ku geej ku reeré",
+    "model": "gemini-3.5-flash-lite",
+    "confidence": 0.85
   },
   "wo_017": {
-    "text": "aa ngag nit du waxoon nan ou dn ngay gis ay melontaanygi xam ie",
-    "model": "simulated",
-    "confidence": null
+    "text": "da ngay guiss ni ñu waxoon ni ñu da ngay guiss ay melentaan yo xamne",
+    "model": "gemini-3.5-flash-lite",
+    "confidence": 0.85
   },
   "wo_018": {
-    "text": "machoat aleahak y a bne qoeetaon que j pan",
-    "model": "simulated",
-    "confidence": null
+    "text": "",
+    "model": "gemini-3.5-flash-lite",
+    "confidence": 0
   },
   "wo_019": {
-    "text": "ba ktsoina oa la wkwu guondegm eapue ga",
-    "model": "simulated",
-    "confidence": null
+    "text": "Boko soxna sa wonee la wéwu gayndé ga galanu tiéput ga.",
+    "model": "gemini-3.5-flash-lite",
+    "confidence": 0.85
   },
   "wo_020": {
-    "text": "leren bb lu baax co liktbi nnmp",
-    "model": "simulated",
-    "confidence": null
+    "text": "Leneen bi lu bax ci lire bi dafa ko wara namm.",
+    "model": "gemini-3.5-flash-lite",
+    "confidence": 0.95
   },
   "wo_021": {
-    "text": "tag bt buberi dem di utiuiw boo xan nimaea dafe gudi",
-    "model": "simulated",
-    "confidence": null
+    "text": "taw yu du bari ngir lim di uti jiw bo xamni dafa gudu",
+    "model": "gemini-3.5-flash-lite",
+    "confidence": 0.85
   },
   "wo_022": {
-    "text": "loolu agotax boo beggee emkkunpm ni nmko waset cognitbon tu njdkksi",
-    "model": "simulated",
-    "confidence": null
+    "text": "Lolu motax bo bëgge bokk IGEP nim ko waxe condition bu jëkk bi",
+    "model": "gemini-3.5-flash-lite",
+    "confidence": 0.95
   },
   "wo_023": {
-    "text": "ba nga xsene donc dioaum bese moo xam iudinan ko topp digan keksi quoi deqi wallu gerte walk ci wanludugug",
-    "model": "simulated",
-    "confidence": null
+    "text": "na xamné donc amna mbuur yo xamné ñu ngi ko donc ñu ngi ko ki quoi jecc ki ci wallu gérse wala goop ci wallu gérse",
+    "model": "gemini-3.5-flash-lite",
+    "confidence": 0.82
   },
   "wo_024": {
-    "text": "magane joge si ltolu ndabn ierinu damekl",
-    "model": "simulated",
-    "confidence": null
+    "text": "Ma gën diogé ci lolu doon sëriñu damel",
+    "model": "gemini-3.5-flash-lite",
+    "confidence": 0.95
   },
   "wo_025": {
-    "text": "qua goolb sa climagbqueyi ngeed wax ni lan oi lanu tegg prottt bg",
-    "model": "simulated",
-    "confidence": null
+    "text": "parce que lolu ci changement climatique yi ngen wax ci li ñu sukkandiku tegg projet.",
+    "model": "gemini-3.5-flash-lite",
+    "confidence": 0.85
   },
   "wo_026": {
-    "text": "loeeu pourkmkgal li md wasla pourwgge ne gestu wand na ko ba ndppe",
-    "model": "simulated",
-    "confidence": null
+    "text": "Lolu pur degg li mu wax la, mënë na gëstu mënë na ko banoo bi.",
+    "model": "gemini-3.5-flash-lite",
+    "confidence": 0.92
   },
   "wo_027": {
-    "text": "ntlleregu b nekk diggbntebaktun ok ndnr",
-    "model": "simulated",
-    "confidence": null
+    "text": "kooler bu yagg nekk diggante bakkel ak ndar",
+    "model": "gemini-3.5-flash-lite",
+    "confidence": 0.92
   },
   "wo_028": {
-    "text": "prase picbkg ne eam ne tifu tu dugg bk ynigee daf fat takg",
-    "model": "simulated",
-    "confidence": null
+    "text": "Picc ku nekk xam na ni fu mu dugg bu yaggé da fiy tagg.",
+    "model": "gemini-3.5-flash-lite",
+    "confidence": 0.95
   },
   "wo_029": {
-    "text": "ci jamono bi du nekt ttbepp prpjet boo xkm dak ciy rok jspmnse acteurs dici wat aoasp ynppdun ci wgr s japp",
-    "model": "simulated",
-    "confidence": null
+    "text": "Ci jamono bi ñu nek, bepp projet bo xamne def ci yëngu-tu rek, je pense acteur yi ci wara japp yëpp dañ ci wara japp.",
+    "model": "gemini-3.5-flash-lite",
+    "confidence": 0.95
   },
   "wo_030": {
-    "text": "aiwnalxanaam nepp dinonudaisi",
-    "model": "simulated",
-    "confidence": null
+    "text": "Kero gi amul fiy am ñepp danañu dekki.",
+    "model": "gemini-3.5-flash-lite",
+    "confidence": 0.95
   },
   "wo_031": {
-    "text": "mednaam gaaque agricole sala mel de kugmuodelle ii comme mutuelle yi no limoonmi mutuelle uliookn",
-    "model": "simulated",
-    "confidence": null
+    "text": "mana banque agricole wala le melako mutel yi comme mutel yi niou diimbeuli niouy diimbeuli sank",
+    "model": "gemini-3.5-flash-lite",
+    "confidence": 0.85
   },
   "wo_032": {
-    "text": "mbereaa mgice diggu geee biduq yi dar ko",
-    "model": "simulated",
-    "confidence": null
+    "text": "Bërmang ci diggi Geew bi, suxuy darko.",
+    "model": "gemini-3.5-flash-lite",
+    "confidence": 0.95
   },
   "wo_033": {
-    "text": "stittonsbesl keur massai",
-    "model": "simulated",
-    "confidence": null
+    "text": "station chaîne Coeur Massar",
+    "model": "gemini-3.5-flash-lite",
+    "confidence": 0.95
   },
   "wo_034": {
-    "text": "leasi loolu oskan bi kmjegee dngg ngsdun yemfoefu nanbk nt waxalue asoab wi putddanu leet danu oiodignte",
-    "model": "simulated",
-    "confidence": null
+    "text": "Léegi lolu askan bi buko jëlee, dégg nga, duñu génn foofu. Ñun buñu waxee askan wi dañu leen di orienté.",
+    "model": "gemini-3.5-flash-lite",
+    "confidence": 0.95
   },
   "wo_035": {
-    "text": "bi di amnng feks no guddi jotia",
-    "model": "simulated",
-    "confidence": null
+    "text": "Bi lolu di am nak fekk na guddi jot na",
+    "model": "gemini-3.5-flash-lite",
+    "confidence": 0.95
   },
   "wo_036": {
-    "text": "pegg nkako na mu mn benn montaram ku base yi",
-    "model": "simulated",
-    "confidence": null
+    "text": "Peg na ko ba mu mayma benn ci montaram yu bari yi.",
+    "model": "gemini-3.5-flash-lite",
+    "confidence": 0.95
   },
   "wo_037": {
-    "text": "to dafa lu uaggayaes bulwicc",
-    "model": "simulated",
-    "confidence": null
+    "text": "Da def ma ñëw lu yagg yagg bu lu wacc",
+    "model": "gemini-3.5-flash-lite",
+    "confidence": 0.85
   },
   "wo_038": {
-    "text": "paeck qug nun bepp xam nanu njeexital ni xam neidouuction ahimigueddn dan km am ki ui",
-    "model": "simulated",
-    "confidence": null
+    "text": "Pasé ñun ñepp xamnañu njeexital bi nga xamne production chimique dañu ko am ci alam bi.",
+    "model": "gemini-3.5-flash-lite",
+    "confidence": 0.89
   },
   "wo_039": {
-    "text": "kon daammaa ngi nuyoobi aa ci kanaade naao eaula ti gammkgi noa oamni mgosla paasg",
-    "model": "simulated",
-    "confidence": null
+    "text": "kon dal mangi yemalé fofu ñu yobbu ko ci kanam di ñaan Yalla ci gambu gi nga xamni mom lañu passé tam.",
+    "model": "gemini-3.5-flash-lite",
+    "confidence": 0.95
   },
   "wo_040": {
-    "text": "mosqknetamsblikoul jiaan",
-    "model": "simulated",
-    "confidence": null
+    "text": "Mosquée Massalikoul Dinar",
+    "model": "gemini-3.5-flash-lite",
+    "confidence": 0.95
   },
   "yo_001": {
-    "text": "fagekiti lsra awon sokoto giojs kjigbe",
-    "model": "simulated",
-    "confidence": null
+    "text": "Fàléètsìì Lọ́ráà, àwọn ṣọ́kọ́tọ́ nì yọ́ jẹ ìgbó.",
+    "model": "gemini-3.5-flash-lite",
+    "confidence": 0.85
   },
   "yo_002": {
-    "text": "bigbondo aneo ma ba wa da smmro mii oo topodomsrumusu",
-    "model": "simulated",
-    "confidence": null
+    "text": "Kí gbogbo ayé wá bá wa da sí ọrọ yìí kó tó pọ̀ lùkúrùmùṣu.",
+    "model": "gemini-3.5-flash-lite",
+    "confidence": 0.95
   },
   "yo_003": {
-    "text": "mama mi ki o ln ra eja kinden aani isooa",
-    "model": "simulated",
-    "confidence": null
+    "text": "Màmá Rómí, kí ni Lọra? Ẹ jẹ́ a nì díwọn ìṣòdá.",
+    "model": "gemini-3.5-flash-lite",
+    "confidence": 0.95
   },
   "yo_004": {
-    "text": "s wooei tono poun o nibe ejo rtage omekhun oi edoseku peja",
-    "model": "simulated",
-    "confidence": null
+    "text": "Ẹ wo omi tó sọ pé ohun o ní ba ẹ jà rẹ. Aṣẹ omi ohun ni yóò ṣe ku pẹja.",
+    "model": "gemini-3.5-flash-lite",
+    "confidence": 0.95
   },
   "yo_005": {
-    "text": "iomti mu emanueli si iba tn yod ko btwtn n se bmta",
-    "model": "simulated",
-    "confidence": null
+    "text": "Wọn ti mu Emmanueli lo si CBT yọ ti kọ bi wọn ti n ṣe bata.",
+    "model": "gemini-3.5-flash-lite",
+    "confidence": 0.95
   },
   "yo_006": {
-    "text": "maa se ese iaa niuorid dkle obi awon iwe fagunwa",
-    "model": "simulated",
-    "confidence": null
+    "text": "Máa ṣẹ́ ẹ̀ṣẹ̀ náà, ní tòrí ó dálè, ó rí àwọn ìwé fágúnwà.",
+    "model": "gemini-3.5-flash-lite",
+    "confidence": 0.95
   },
   "yo_007": {
-    "text": "ouo obi lotak ogede losi",
-    "model": "simulated",
-    "confidence": null
+    "text": "Okòó bilọ́ṣù tiyọ̀gẹdẹlọ́sí.",
+    "model": "gemini-3.5-flash-lite",
+    "confidence": 0.85
   },
   "yo_008": {
-    "text": "naadbalo ye kt maa se",
-    "model": "simulated",
-    "confidence": null
+    "text": "dada lo ye ka ma se",
+    "model": "gemini-3.5-flash-lite",
+    "confidence": 0.85
   },
   "yo_009": {
-    "text": "sb o airi abo eleta ri",
-    "model": "simulated",
-    "confidence": null
+    "text": "ṣe olotu ri abọ ẹlẹta ri",
+    "model": "gemini-3.5-flash-lite",
+    "confidence": 0.85
   },
   "yo_010": {
-    "text": "akayimoye ineti ojogbon ajiboye oladkibo tn kt",
-    "model": "simulated",
-    "confidence": null
+    "text": "Akáìmọ̀yé ìwé ni ọjọgbọ̀n Àjíbọ̀yé Òlādìpọ̀ kọ.",
+    "model": "gemini-3.5-flash-lite",
+    "confidence": 0.95
   },
   "yo_011": {
-    "text": "mloriisi asofoo wa ni agbegbeiaa",
-    "model": "simulated",
-    "confidence": null
+    "text": "Olori ile aṣọfin wà ni agbegbe náà.",
+    "model": "gemini-3.5-flash-lite",
+    "confidence": 0.95
   },
   "yo_012": {
-    "text": "oogum abenigknuo miwon i pee",
-    "model": "simulated",
-    "confidence": null
+    "text": "Ogun abenu gangan ni won n pe",
+    "model": "gemini-3.5-flash-lite",
+    "confidence": 0.85
   },
   "yo_013": {
-    "text": "so yt mkasogo sakasaka toru ao eniio ranni",
-    "model": "simulated",
-    "confidence": null
+    "text": "Kò yẹ ká máa sọ̀rọ̀ ṣakaṣaka, torí a ò mọ̀ ẹni tó lè ràn lọ́wọ́.",
+    "model": "gemini-3.5-flash-lite",
+    "confidence": 0.95
   },
   "yo_014": {
-    "text": "awon baga baea mi loke ineyg do",
-    "model": "simulated",
-    "confidence": null
+    "text": "Àwon bàbá bàbá mi ló tè ìlè yìí dó.",
+    "model": "gemini-3.5-flash-lite",
+    "confidence": 0.95
   },
   "yo_015": {
-    "text": "slkjapa ni nseti lmla n sekb tswo ibe",
-    "model": "simulated",
-    "confidence": null
+    "text": "Aláàjọ paníṣẹ́ ti Lọlá ń ṣe kò tó wọ iṣẹ́ ọlọpaa.",
+    "model": "gemini-3.5-flash-lite",
+    "confidence": 0.95
   },
   "yo_016": {
-    "text": "tokoroutrsn ui o gbongbn ao ni dii",
-    "model": "simulated",
-    "confidence": null
+    "text": "Kòkòrò àrùn tí ó gbógun ti pọ̀ ní ìlú yìí.",
+    "model": "gemini-3.5-flash-lite",
+    "confidence": 0.92
   },
   "yo_017": {
-    "text": "olodgmarm nn kb e ga ain nrisa kanbbn beyinogs",
-    "model": "simulated",
-    "confidence": null
+    "text": "Olódùmarè ni ké ma sìn oríṣa kankan lẹ́yìn ọn.",
+    "model": "gemini-3.5-flash-lite",
+    "confidence": 0.95
   },
   "yo_018": {
-    "text": "maa t mo outsdadakuada latsii si orikeeniyak",
-    "model": "simulated",
-    "confidence": null
+    "text": "Wọn ni lo orin dada kuada lati fi ki oriki eniyan.",
+    "model": "gemini-3.5-flash-lite",
+    "confidence": 0.95
   },
   "yo_019": {
-    "text": "iya fanuriti ni on seisewo men",
-    "model": "simulated",
-    "confidence": null
+    "text": "Yàrà pàsútì nìyí o sẹ́ Inọ́wọ́ lọjọ́ yẹn.",
+    "model": "gemini-3.5-flash-lite",
+    "confidence": 0.85
   },
   "yo_020": {
-    "text": "o le rin kiade bayi eo",
-    "model": "simulated",
-    "confidence": null
+    "text": "Se o lẹrin ki a ju bailo?",
+    "model": "gemini-3.5-flash-lite",
+    "confidence": 0.85
   },
   "yo_021": {
-    "text": "tokotaon ara ilkoun ti beje",
-    "model": "simulated",
-    "confidence": null
+    "text": "Tọ́kọ̀taya ará ìlú Kánù tí bàjẹ́.",
+    "model": "gemini-3.5-flash-lite",
+    "confidence": 0.95
   },
   "yo_022": {
-    "text": "akalknoti bndemi nignd tdo se kemesugbud o ti ydto dae si",
-    "model": "simulated",
-    "confidence": null
+    "text": "Àkálù lo ni bídé è mí nígbà tí ó sì kéré, sùgbọ́n ó ti àtọ̀ diẹ nísìnyìí.",
+    "model": "gemini-3.5-flash-lite",
+    "confidence": 0.85
   },
   "yo_023": {
-    "text": "ileri fum ai pa o ni fi disile",
-    "model": "simulated",
-    "confidence": null
+    "text": "Ṣé ẹlẹ́yìí fún mi pé o nìfì mi sílẹ̀?",
+    "model": "gemini-3.5-flash-lite",
+    "confidence": 0.95
   },
   "yo_024": {
-    "text": "oyinbgua omuere maad so ns tkre",
-    "model": "simulated",
-    "confidence": null
+    "text": "Oyinbọ bi ọpẹ rẹ ni o ma n sọ ni ti rẹ.",
+    "model": "gemini-3.5-flash-lite",
+    "confidence": 0.85
   },
   "yo_025": {
-    "text": "do ti ko o bi oseti io",
-    "model": "simulated",
-    "confidence": null
+    "text": "ẹnì tó tì ku o ní retìmọ",
+    "model": "gemini-3.5-flash-lite",
+    "confidence": 0.85
   },
   "yo_026": {
-    "text": "nro neasabiisani su ase oaa",
-    "model": "simulated",
-    "confidence": null
+    "text": "lẹ́hìn omi àyà bí àsà ni mo fi ṣe iṣẹ́ náà",
+    "model": "gemini-3.5-flash-lite",
+    "confidence": 0.85
   },
   "yo_027": {
-    "text": "ise metinai ogauni caleboi oa ta",
-    "model": "simulated",
-    "confidence": null
+    "text": "Ìwémẹ́rin ni ọgbẹ̀ni Kélébù ní Kára.",
+    "model": "gemini-3.5-flash-lite",
+    "confidence": 0.95
   },
   "yo_028": {
-    "text": "eigaki meta eiriiresd akoko",
-    "model": "simulated",
-    "confidence": null
+    "text": "Ẹfi sàkì mẹ́ta sori ẹ̀sẹ̀ akókó.",
+    "model": "gemini-3.5-flash-lite",
+    "confidence": 0.95
   },
   "yo_029": {
-    "text": "kianfaamu gatnde awaye",
-    "model": "simulated",
-    "confidence": null
+    "text": "Mọ̀ ń fẹ́ láti dé àdúgbò àwájé",
+    "model": "gemini-3.5-flash-lite",
+    "confidence": 0.85
   },
   "yo_030": {
-    "text": "lobm ms ra owo sg ero ibanisoro ms",
-    "model": "simulated",
-    "confidence": null
+    "text": "Lọ́bàmírà owó sí orí ẹ̀rọ ìbánisọ̀rọ̀ mi.",
+    "model": "gemini-3.5-flash-lite",
+    "confidence": 0.95
   },
   "yo_031": {
-    "text": "o nitai toun mu lowo yii nko se k’inn fe sitbni",
-    "model": "simulated",
-    "confidence": null
+    "text": "Ọ̀ ní èyí tóun mú lọ́wọ́ yìí nkọ́, ṣé kòun fi sílẹ̀ ni?",
+    "model": "gemini-3.5-flash-lite",
+    "confidence": 0.95
   },
   "yo_032": {
-    "text": "modi otegobi ptmi ldri ero obanaaoro so bu ii ola",
-    "model": "simulated",
-    "confidence": null
+    "text": "Mọ̀ní kí o kéjọ̀ bí pe mi lórí ẹ̀rọ ìbanisọ̀rọ̀ tó bá di ọ̀la.",
+    "model": "gemini-3.5-flash-lite",
+    "confidence": 0.95
   },
   "yo_033": {
-    "text": "uon oeafun janunjbgut naa lana",
-    "model": "simulated",
-    "confidence": null
+    "text": "Wọn ta ọja fun jagunjagun náà laye.",
+    "model": "gemini-3.5-flash-lite",
+    "confidence": 0.85
   },
   "yo_034": {
-    "text": "naa iombara muabi bdi ara",
-    "model": "simulated",
-    "confidence": null
+    "text": "Ọmọ náà kò mọ́ra mú, a fi bí ara oko.",
+    "model": "gemini-3.5-flash-lite",
+    "confidence": 0.95
   },
   "yo_035": {
-    "text": "akinwunmi ko eiwan see ka",
-    "model": "simulated",
-    "confidence": null
+    "text": "Akiun mi fẹ ko bi won ṣe n ka ewi",
+    "model": "gemini-3.5-flash-lite",
+    "confidence": 0.95
   },
   "yo_036": {
-    "text": "aeonelapatb ju kwonenbtan te maa pa eran tita",
-    "model": "simulated",
-    "confidence": null
+    "text": "Àwọn alápatà jẹ́ àwọn ẹnìyàn tó máa ń pa ẹran fún títà.",
+    "model": "gemini-3.5-flash-lite",
+    "confidence": 0.95
   },
   "yo_037": {
-    "text": "moburan iatide",
-    "model": "simulated",
-    "confidence": null
+    "text": "Mọ̀fẹ́ràn ìsọ̀kusọ lọjọ́ Saturday.",
+    "model": "gemini-3.5-flash-lite",
+    "confidence": 0.85
   },
   "yo_038": {
-    "text": "dig tie abkki ouo monifade ara isseun",
-    "model": "simulated",
-    "confidence": null
+    "text": "Jẹ́ ní ti ẹni bẹ́ẹ̀, àbí ké? Ọmọ ọmọ ń f'àdè, ará Ìṣọ̀kùn.",
+    "model": "gemini-3.5-flash-lite",
+    "confidence": 0.95
   },
   "yo_039": {
-    "text": "mo dupe ore",
-    "model": "simulated",
-    "confidence": null
+    "text": "Modúpẹ́ oorẹ atìgbàdẹ̀gbà, olúwa.",
+    "model": "gemini-3.5-flash-lite",
+    "confidence": 0.95
   },
   "yo_040": {
-    "text": "ile-ifeae oiunbfa ti man m bete kmakiri gbosbo tgbanloayd",
-    "model": "simulated",
-    "confidence": null
+    "text": "Ìlú yìí fẹni Ọdún Ifá ti mọ n bẹrẹ káàkiri gbogbo agbaye.",
+    "model": "gemini-3.5-flash-lite",
+    "confidence": 0.85
   }
 }

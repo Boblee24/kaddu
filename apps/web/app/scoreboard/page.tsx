@@ -63,7 +63,7 @@ export default async function ScoreboardPage() {
 
       <p className="text-sm text-[var(--muted)]">
         “AI draft” compares the draft to the text speakers agreed on. “Speakers” compares that agreed text to a known transcript, where one
-        exists. Drafts are simulated until a speech model runs on these clips. Updated every minute. Method and simulated eval: eval/RESULTS.md.
+        exists. Drafts come from Gemini (audio input). Updated every minute. Method and eval: eval/RESULTS.md.
       </p>
       <Link href="/" className="self-start font-semibold underline underline-offset-4">
         ← Start correcting

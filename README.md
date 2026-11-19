@@ -1,6 +1,6 @@
 # Kàddu: AI can't understand our languages yet. Get paid in sats to teach it.
 
-> Built for Dakar Bitcoin Hack 2026. MIT licensed. **Demo: test sats, sample data, simulated AI drafts** (see [What's simulated](#constraints--whats-simulated)).
+> Built for Dakar Bitcoin Hack 2026. MIT licensed. **Demo: test sats, sample data, scripted personas** (see [What's simulated](#constraints--whats-simulated)).
 
 *Kàddu* means "speech" in Wolof. You hear a short voice clip in Wolof, Yorùbá or Naija Pidgin and see the AI's rough
 transcript. You fix it. When two other speakers agree with your fix, sats land in your Lightning wallet within seconds.
@@ -53,8 +53,10 @@ transcript. You fix it. When two other speakers agree with your fix, sats land i
 
 ## Where AI is used and how it's evaluated
 AI proposes; rules decide.
-- **Drafts:** a speech model writes the first transcript (Gemini for wo/pcm, Spitch for yo, via `pnpm drafts`).
-  **In this demo the drafts are simulated** (see below) and the UI labels them "simulated draft".
+- **Drafts:** Gemini (`gemini-3.5-flash-lite`, audio input) writes the first transcript of every seed clip
+  (`pnpm drafts` → `seed/drafts.json`). The spec routes Yorùbá to Spitch, but no Spitch key was available, so **Yorùbá
+  also uses Gemini**. On the real seed clips the drafts are still far off (Wolof WER 0.65, Yorùbá 0.69; see Metrics),
+  which is exactly the gap Kàddu pays people to close. Draft confidence is the model's own estimate (a heuristic).
 - **Pricing by difficulty:** 20 sats base, +10 if draft confidence < 0.6, +10 if the clip is longer than 6 s. Amounts come
   only from this server-side table.
 - **Fraud judge:** an LLM reads the corrected text (as untrusted data) and returns `plausible_language`, `gibberish`,
@@ -96,7 +98,8 @@ Other commands:
 | `pnpm seed` | migrate, load `seed/` clips, run the scripted personas |
 | `pnpm fetch:wolof` / `pnpm fetch:yoruba` | download the seed clips (see Seed data) |
 | `pnpm pcm:import` | import the author's Pidgin recordings, matched against `seed/pcm_script.md` |
-| `pnpm eval` / `pnpm simulate` | metrics below |
+| `pnpm drafts` | Gemini drafts for the seed clips → `seed/drafts.json` |
+| `pnpm eval [--live]` / `pnpm simulate` | metrics below (`--live` uses the real Gemini judge) |
 | `pnpm checkpoint` | end-to-end: fresh worker qualifies, forms consensus, claims into `NWC_LIVE_WORKER` |
 | `pnpm typecheck && pnpm test && pnpm lint` | 140 tests |
 
@@ -115,32 +118,34 @@ Mocked or simulated rows are labelled.
 
 | Metric | Value | How measured |
 |---|---|---|
-| Red-team attacks stopped | 10 / 10 | `pnpm eval`, full pipeline (paste-back, injection, gibberish, wrong language, copy, replay, forgery…) |
-| Fraud precision / recall, deterministic checks only | 100% / 27% | 80 labelled submissions (30 bad), `eval/fraud.json` |
-| Fraud precision / recall, with judge | 100% / 80% | same cases, **mock judge** (keyword heuristics under `AI_MOCK`) |
-| Sats leaked to wrong transcripts | 0 in every run | `pnpm simulate`, 70/20/10 and 40/30/30 honest/lazy/malicious, **synthetic drafts** |
+| AI draft error on real seed clips | Wolof WER 0.65 / CER 0.27; Yorùbá WER 0.69 / CER 0.30 (0.41 / 0.13 ignoring tone marks) | `pnpm drafts` with Gemini `gemini-3.5-flash-lite` on 40 + 40 clips vs their known transcripts (`eval/RESULTS.md` §0) |
+| Red-team attacks stopped | 10 / 10 | `pnpm eval --live`, full pipeline with the **real Gemini judge** (paste-back, injection, gibberish, wrong language, copy, replay, forgery…) |
+| Fraud precision / recall, deterministic checks only | 100% / 27% | 80 labelled submissions (30 bad, builder-written), `eval/fraud.json` |
+| Fraud precision / recall, with judge | 100% / 83% | same cases, **real Gemini judge**: all injections, gibberish and wrong-language cases caught; 0 honest corrections flagged. 2 of 72 calls got no verdict after retries and fell back to rules |
+| Judge latency | p50 1.5 s, p95 8.0 s per API call | `pnpm eval --live` (free-tier key, paced calls) |
+| Sats leaked to wrong transcripts | 0 in every run | `pnpm simulate`, 70/20/10 and 40/30/30 honest/lazy/malicious, **synthetic drafts, mock judge** |
 | Draft WER → consensus WER | wo 0.58 → 0.00, yo 0.74 → 0.00, pcm 0.83 → 0.00 | `pnpm eval`, **synthetic drafts** on 24 builder-written sentences |
 | Sats per finished clip | 70 | `pnpm simulate` 70/20/10 (consensus payouts ÷ clips done) |
-| Scoring latency | p50 28.5 ms, p95 76.3 ms | `pnpm eval`, local in-memory Postgres, mock judge |
+| Scoring latency (without the judge call) | p50 18 ms, p95 44 ms | `pnpm eval`, local in-memory Postgres |
 | Live payout | 100 sats settled into the worker wallet | `pnpm checkpoint` on the local stack: 2 gold + 1 consensus clip, claim paid by the sponsor wallet over NWC |
 | First-load JS | about 155 KB gzipped | see Low-bandwidth UX |
-| LLM cost per clip | not measured | no Gemini key during the hackathon |
+| LLM cost per clip | 1 draft call per clip + 1 judge call per correction (3 per clip); token cost not metered | the app counts calls, not tokens |
 
 ## Constraints & what's simulated
-- **AI drafts are simulated.** No Gemini or Spitch key was available, so `pnpm drafts:simulated` made placeholder drafts
-  by corrupting the known transcripts (`draft_model = "simulated"`). The UI labels them. With keys, `pnpm drafts` writes
-  real drafts and nothing else changes.
-- **The judge is mocked** (`AI_MOCK=1`): keyword and heuristic rules stand in for Gemini. The real judge code path exists
-  and is tested with fixtures.
-- **Eval data is synthetic:** 24 short sentences written by the builder, with synthetic drafts. It tests the scoring
-  rules, not the AI.
+- **Drafts are real, Yorùbá via Gemini.** All 80 seed clips have Gemini drafts. Spitch (the spec's choice for Yorùbá)
+  had no key. `pnpm drafts:simulated` still exists for running without a key; such drafts are stored as
+  `draft_model = "simulated"` and the UI labels them.
+- **The judge is real when `AI_MOCK=0`** (Gemini). Tests and the offline demo use a keyword/heuristic mock judge.
+- **Fraud and simulation data are synthetic:** 24 short sentences written by the builder, with synthetic drafts, test
+  the scoring rules. The simulations (sats leaked, sats per clip) use the mock judge to keep API calls down.
+- **Pidgin** has no clips yet: it waits for the author's recordings (`pnpm pcm:import`, then `pnpm drafts --lang pcm`).
 - **Scripted personas:** three persona keys pre-submit two corrections on each clip, so a live worker's submission is
   the third and consensus forms on stage. Persona 3 sometimes pastes back the AI draft, to show that being rejected.
 - **Wallets:** sponsor and worker wallets are test wallets with small balances.
 - **Rate limits** are in memory, per server instance.
 
 ## Next steps
-- Real drafts from a self-hosted Wolof ASR model (whosper / M-Kiriku) and Spitch for Yorùbá, then re-run the eval.
+- Better drafts: a self-hosted Wolof ASR model (whosper / M-Kiriku) and Spitch for Yorùbá, then re-run `pnpm eval --live`.
 - The demand side as Nostr DVMs (NIP-90): dataset buyers post jobs, workers' corrections fill them.
 - Cash-out to mobile money (Banxaas-style) for workers without a Lightning habit.
 - Recording tasks (workers read prompts), Hausa seed clips, worker reputation beyond gold accuracy, mainnet sponsor

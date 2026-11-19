@@ -27,7 +27,8 @@
     "fetch:wolof": "tsx scripts/fetch-wolof.ts",
     "fetch:yoruba": "tsx scripts/fetch-yoruba.ts",
     "pcm:import": "tsx scripts/pcm-import.ts",
-    "drafts:simulated": "tsx scripts/sim-drafts.ts"
+    "drafts:simulated": "tsx scripts/sim-drafts.ts",
+    "drafts": "tsx scripts/drafts.ts"
   },
   "devDependencies": {
     "@types/node": "^24.19.2",

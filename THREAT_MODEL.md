@@ -49,7 +49,7 @@ worker browser ──(signed Nostr events)──▶ Next.js API ──▶ Postgr
 | XSS / injected scripts | Per-request nonce CSP from the starter (no inline styles either); exact relay origins only; React escaping; no `dangerouslySetInnerHTML`. | `csp.test.ts` |
 | Slow first NWC connection mistaken for a bad string | `connectWallet` retries once with a fresh client (15 s, then 30 s) and closes the stuck one; definitive wallet errors (UNAUTHORIZED, RESTRICTED…) don't retry. The sponsor wallet is cached only after a successful connect. | `connect.test.ts` |
 | Licence violation in the dataset | Licence per clip: Yorùbá clips come from CC BY-SA 4.0 audio, so their transcripts are exported and attested as CC BY-SA 4.0; everything else is CC-BY-4.0. Sources and checks recorded in `seed/LICENSES.md`. | `licenseFor()` in `score.ts`, `sponsorOps.ts` |
-| Workers misled about AI quality | Simulated placeholder drafts are stored with `draft_model = "simulated"` and the work screen labels them. | `assign.ts`, `/work` |
+| Workers misled about AI quality | Drafts record their model (`draft_model`); placeholder drafts made without a key are stored as `"simulated"` and the work screen labels them. | `assign.ts`, `/work` |
 | Supply chain in the seed pipeline | Audio conversion uses the pinned `ffmpeg-static` binary (no system ffmpeg); downloads are read with HTTP range requests from the dataset hosts only; the scripts run on the builder's machine, never on the server. | `scripts/_seedlib.ts` |
 | Flooding | In-memory token buckets keyed by a salted hash of IP + user agent: `/api/next` 30 (1/s), `/api/corrections` 20 (1 per 2 s), `/api/claim` 5 (1 per 10 s), `/api/balance` 30, sponsor login 5, upload 30. Request bodies capped (4 KB JSON). | `lib/http.ts` |
 | PII in logs | Allowlisted logger only (`event, id, paymentHash, latencyMs, status, code, count`); eslint bans `console`; a test runs the whole pipeline and checks that no transcript, pubkey, invoice or token reaches the log. | `log-audit.test.ts`, `log.test.ts` |
@@ -61,7 +61,10 @@ worker browser ──(signed Nostr events)──▶ Next.js API ──▶ Postgr
 - **Pubkeys are public** (`/api/balance` and the export show them). They are pseudonymous: no name,
   phone or email is ever collected.
 - **The mock judge** (offline demo) is keyword-based. With a Gemini key the real judge is used.
-- **Drafts are simulated** in the demo, so draft-quality numbers say nothing about real ASR yet.
+- **The judge can be unavailable** (timeouts, rate limits: 2 of 72 eval calls got no verdict). A missing verdict never
+  blocks or pays by itself: the deterministic checks, gold and k=3 consensus still apply.
+- **`GEMINI_MODEL`** must be a model the key can use: `gemini-2.5-flash-lite` is retired for new keys (404), so the
+  default is now `gemini-3.5-flash-lite`.
 - **The live payout path** was checked end to end on the local stack (`pnpm checkpoint`: 100 sats settled into the
   worker wallet). The deployed Neon + Vercel stack runs the same code but has not been through `pnpm checkpoint --base <url>` yet.
 - **Voices** in seed data come from openly licensed datasets (galsenai Wolof, Apache-2.0; OpenSLR SLR86

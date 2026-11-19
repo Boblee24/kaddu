@@ -14,8 +14,9 @@
 ### 0:00–0:20 · The problem
 *Phone on the projector, `/work` open on a Wolof clip.*
 - Tap the big indigo ▶. The clip plays and the orange ring fills.
-- Point at **"The AI heard"**: it's visibly wrong. (Say it plainly: in this demo the draft is **simulated**; the label
-  says so. Published benchmarks put Whisper at about 97% WER on Wolof; that's a vendor benchmark.)
+- Point at **"The AI heard"**: that's Gemini's real transcript of this clip, and it's wrong (on our 40 Wolof clips its
+  drafts get about 65% of words wrong). Published benchmarks put Whisper at about 97% WER on Wolof; that's a vendor
+  benchmark.
 - Line: *"AI can't understand half of Senegal yet. Kàddu pays the people who can."*
 
 ### 0:20–1:10 · Fix → agree → paid
@@ -45,12 +46,14 @@
 
 ### 1:50–2:30 · Does it work? (numbers)
 - `/scoreboard`: draft WER vs speakers' WER per language, sats earned and paid, number of speakers.
-- `eval/RESULTS.md` (**synthetic drafts and a mock judge, labelled as such**):
-  - fraud precision 100%, recall 27% → 80% with the judge;
+- `eval/RESULTS.md`:
+  - real drafts on real clips: Wolof WER 0.65, Yorùbá 0.69;
+  - fraud precision 100%, recall 27% → 83% with the **real Gemini judge** (builder-written attack cases);
   - **0 sats leaked** to wrong transcripts in every simulation, including a 30% malicious crowd;
-  - scoring p50 28 ms.
+  - scoring p50 18 ms plus the judge call (p50 1.5 s);
+  - the simulations use synthetic drafts and the mock judge (labelled).
 - Real payout: `pnpm checkpoint` settled 100 sats into the worker wallet end to end.
-- Cost per clip: 20–40 sats to the worker. LLM cost was not measured (no key).
+- Cost per clip: 20–40 sats to the worker, plus 1 draft call and 3 judge calls (tokens not metered).
 
 ### 2:30–3:00 · Who pays, what's next
 - Dataset funders (labs, NGOs, language-tech companies) post a budget; the dataset is open (CC-BY / CC BY-SA) with a

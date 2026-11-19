@@ -198,7 +198,7 @@ export async function simulate(clips: EvalClip[], o: SimOpts) {
 
 // ---- red team: 10 attacks through the full pipeline ------------------------------------------------
 
-export async function redTeam(clips: EvalClip[]) {
+export async function redTeam(clips: EvalClip[], judge: Judge = mockJudge) {
   const { db, close } = await makeTestDb();
   const results: Array<{ case: string; expected: string; actual: string; pass: boolean }> = [];
   try {
@@ -212,7 +212,7 @@ export async function redTeam(clips: EvalClip[]) {
     const run = async (w: { sk: Uint8Array }, clipId: string, text: string) => {
       const s = await storeCorrection(db, sign(w, clipId, text));
       if (!s.ok) return s.code;
-      const out = await scoreCorrection(db, s.correction, { judge: mockJudge });
+      const out = await scoreCorrection(db, s.correction, { judge });
       return out.decision === "accepted" ? `accepted, ${out.sats} sats${out.code ? ` (${out.code})` : ""}` : `${out.decision}${out.code ? ` (${out.code})` : ""}`;
     };
     const golds = clips.filter((c) => c.gold && c.lang === "wo");
@@ -242,7 +242,8 @@ export async function redTeam(clips: EvalClip[]) {
     const wrongDraftIdx = nonGold.findIndex((x, i) => i >= next && cer(x.truth, x.draft, { diacritics: false }) > 0.3);
     if (wrongDraftIdx > next) [nonGold[next], nonGold[wrongDraftIdx]] = [nonGold[wrongDraftIdx]!, nonGold[next]!];
     c = await primed();
-    add("Lazy paste-back of a wrong AI draft", "rejected (disagree)", await run(attacker, c.id, c.draft));
+    // Consensus rejects it as "disagree"; a real LLM judge may already reject a garbled draft as gibberish. Either is a pass.
+    add("Lazy paste-back of a wrong AI draft", "rejected", await run(attacker, c.id, c.draft));
     c = await primed();
     add("Prompt injection in the transcript", "rejected (injection)", await run(attacker, c.id, INJECTIONS[0]!));
     c = await primed();

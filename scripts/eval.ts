@@ -1,29 +1,87 @@
 /**
- * pnpm eval → eval/fraud.json + eval/RESULTS.md
- * Everything here is SIMULATED: builder-written text clips, synthetic drafts, mock (heuristic) judge.
- * Real numbers need recorded clips + `pnpm drafts` + a Gemini key; the report says so at the top.
+ * pnpm eval [--live] → eval/fraud.json + eval/RESULTS.md
+ * Default: mock (heuristic) judge, no keys needed. --live: the real Gemini judge (GEMINI_API_KEY in .env.local)
+ * for the fraud cases and the red team; the simulations keep the mock judge (hundreds of calls) and say so.
+ * The fraud cases and simulation clips are builder-written text with synthetic drafts. Section 0 reports the real
+ * AI drafts (seed/drafts.json from `pnpm drafts`) against the seed clips' known transcripts.
  */
-import { writeFileSync } from "node:fs";
+import { existsSync, readFileSync, writeFileSync } from "node:fs";
+import { parseArgs } from "node:util";
+import { loadEnvLocal } from "./_env";
+import { readManifest } from "./_seedlib";
 
-process.env.AI_MOCK = "1";
+const LIVE = parseArgs({ options: { live: { type: "boolean", default: false } } }).values.live!;
+if (LIVE) {
+  loadEnvLocal();
+  if (!process.env.GEMINI_API_KEY) {
+    console.error("✗ --live needs GEMINI_API_KEY in .env.local");
+    process.exit(1);
+  }
+  process.env.AI_MOCK = "0";
+} else process.env.AI_MOCK = "1";
 const { evalClips, fraudCases } = await import("../apps/web/lib/evaldata");
 const { fraudEval, simulate, redTeam } = await import("../apps/web/lib/evalrun");
+const { llmJudge, mockJudge } = await import("../apps/web/lib/judge");
+const { cer, wer } = await import("../apps/web/lib/text");
+const { aiMetrics, resetAiMetrics } = await import("../packages/ai/src/index");
 const { setLogSink } = await import("../packages/core/src/log");
 setLogSink(() => {});
+// Live: pace calls (the free tier rate-limits bursts) and retry a missing verdict up to 3 times with back-off.
+const verdicts = { ok: 0, missing: 0 };
+let lastCall = 0;
+const paced: typeof llmJudge = async (input) => {
+  for (let attempt = 0; attempt < 4; attempt++) {
+    const wait = lastCall + (attempt === 0 ? 2500 : 10_000 * attempt) - Date.now();
+    if (wait > 0) await new Promise((r) => setTimeout(r, wait));
+    lastCall = Date.now();
+    const v = await llmJudge(input);
+    if (v) {
+      verdicts.ok++;
+      return v;
+    }
+  }
+  verdicts.missing++;
+  return null;
+};
+const judge = LIVE ? paced : mockJudge;
+const JL = LIVE ? `Gemini (\`${process.env.GEMINI_MODEL}\`)` : "**mock**";
+
+// ---- 0. real drafts on the seed clips ----
+type Draft = { text: string; model: string; confidence: number | null };
+const drafts: Record<string, Draft> = existsSync("seed/drafts.json") ? JSON.parse(readFileSync("seed/drafts.json", "utf8")) : {};
+const draftRows = (["wo", "yo", "pcm"] as const).map((lang) => {
+  const es = readManifest().filter((e) => e.lang === lang && drafts[e.id] && drafts[e.id]!.model !== "simulated");
+  const mean = (f: (e: (typeof es)[number]) => number) => (es.length ? es.reduce((a, e) => a + f(e), 0) / es.length : NaN);
+  const d = (e: (typeof es)[number]) => drafts[e.id]!.text;
+  const conf = es.filter((e) => drafts[e.id]!.confidence != null);
+  return {
+    lang,
+    n: es.length,
+    model: es[0] ? drafts[es[0].id]!.model : "–",
+    wer: mean((e) => wer(e.truth_text, d(e))),
+    cer: mean((e) => cer(e.truth_text, d(e))),
+    werFolded: mean((e) => wer(e.truth_text, d(e), { diacritics: false })),
+    cerFolded: mean((e) => cer(e.truth_text, d(e), { diacritics: false })),
+    lowConf: conf.filter((e) => drafts[e.id]!.confidence! < 0.6).length,
+    exact: es.filter((e) => cer(e.truth_text, d(e), { diacritics: false }) === 0).length,
+  };
+});
 
 const clips = evalClips();
 const cases = fraudCases(clips);
 writeFileSync("eval/fraud.json", JSON.stringify(cases, null, 2) + "\n");
 console.log(`✓ eval/fraud.json: ${cases.filter((c) => c.label === "bad").length} bad, ${cases.filter((c) => c.label === "good").length} good`);
 
-const fraud = await fraudEval(clips, cases);
+resetAiMetrics();
+const fraud = await fraudEval(clips, cases, judge);
+const judgeCalls = aiMetrics();
 console.log("✓ fraud eval");
 const mix = { workers: 20, honest: 0.7, lazy: 0.2, malicious: 0.1, seed: 42 };
 const sim = await simulate(clips, mix);
 const simNoJudge = await simulate(clips, { ...mix, judge: null });
 const hostile = await simulate(clips, { workers: 20, honest: 0.4, lazy: 0.3, malicious: 0.3, seed: 42 });
 console.log("✓ simulations");
-const rt = await redTeam(clips);
+const rt = await redTeam(clips, judge);
 console.log(`✓ red team: ${rt.filter((r) => r.pass).length}/${rt.length} as expected`);
 
 const pct = (x: number) => `${(x * 100).toFixed(0)}%`;
@@ -34,13 +92,19 @@ const simRow = (name: string, s: Awaited<ReturnType<typeof simulate>>) =>
 
 const md = `# Kàddu eval results
 
-> **Simulated and mocked.** No recorded audio exists yet. These numbers come from ${clips.length} short
-> sentences written by the builder (${clips.filter((c) => c.gold).length} gold), **synthetic AI drafts**
-> (the truth with tone marks dropped, words merged, garbled and dropped), and a **mock judge**
-> (keyword + heuristic rules standing in for Gemini under \`AI_MOCK=1\`). They test the scoring
-> *rules*, not the AI. Re-run \`pnpm eval\` after \`pnpm drafts\` on real clips with a Gemini key.
->
-> Generated by \`pnpm eval\` (deterministic seeds). Data: \`eval/fraud.json\`, \`apps/web/lib/evaldata.ts\`.
+> Generated by \`pnpm eval${LIVE ? " --live" : ""}\`. ${LIVE ? `**Judge: real Gemini (\`${process.env.GEMINI_MODEL}\`)** for the fraud cases (§2) and the red team (§5). The simulations (§1, §3) still use the mock judge, to keep the run to ~100 API calls.` : "**Judge: mock** (keyword + heuristic rules standing in for Gemini under \`AI_MOCK=1\`)."}
+> Section 0 uses the **real AI drafts** on the real seed clips. Sections 1–5 use ${clips.length} short sentences written by
+> the builder (${clips.filter((c) => c.gold).length} gold) with **synthetic drafts**: they test the scoring *rules*.
+> Data: \`eval/fraud.json\`, \`apps/web/lib/evaldata.ts\`, \`seed/drafts.json\`.
+
+## 0. Real AI drafts on the seed clips
+
+Each seed clip's audio sent to the model (\`pnpm drafts\`), compared with the clip's known transcript. "Folded" ignores
+tone marks and other diacritics (they are typed inconsistently). Confidence is the model's own estimate.
+
+| Lang | Clips | Model | WER | CER | WER (folded) | CER (folded) | Exact (folded) | Conf < 0.6 |
+|---|---|---|---|---|---|---|---|---|
+${draftRows.map((r) => (r.n ? `| ${r.lang} | ${r.n} | ${r.model} | ${f2(r.wer)} | ${f2(r.cer)} | ${f2(r.werFolded)} | ${f2(r.cerFolded)} | ${r.exact} | ${r.lowConf} |` : `| ${r.lang} | 0 | – | no real drafts yet | | | | | |`)).join("\n")}
 
 ## 1. Draft vs consensus error rate (synthetic drafts)
 
@@ -58,9 +122,9 @@ plausible); consensus rejects them (section 3 and the red-team table).
 | Detector | Precision | Recall | TP | FP | FN |
 |---|---|---|---|---|---|
 | Deterministic checks only | ${pct(fraud.deterministic.precision)} | ${pct(fraud.deterministic.recall)} | ${fraud.deterministic.tp} | ${fraud.deterministic.fp} | ${fraud.deterministic.fn} |
-| + judge (**mock**) | ${pct(fraud.withJudge.precision)} | ${pct(fraud.withJudge.recall)} | ${fraud.withJudge.tp} | ${fraud.withJudge.fp} | ${fraud.withJudge.fn} |
+| + judge (${JL}) | ${pct(fraud.withJudge.precision)} | ${pct(fraud.withJudge.recall)} | ${fraud.withJudge.tp} | ${fraud.withJudge.fp} | ${fraud.withJudge.fn} |
 
-| Kind | Cases | Bad? | Flagged (deterministic) | Flagged (+ mock judge) |
+| Kind | Cases | Bad? | Flagged (deterministic) | Flagged (+ judge) |
 |---|---|---|---|---|
 ${fraud.byKind.map((k) => `| ${k.kind} | ${k.n} | ${k.bad ? "yes" : "no"} | ${k.det} | ${k.withJudge} |`).join("\n")}
 
@@ -83,18 +147,18 @@ ${simRow("40/30/30, mock judge", hostile)}
 Sats per finished clip (consensus payouts ÷ clips done, 70/20/10): **${sim.satsPerDoneClip.toFixed(0)} sats**.
 Gold (qualification + hidden check) payouts in that run: ${sim.goldSats} sats. With only ${clips.length} clips, gold
 payouts dominate; on a real queue they shrink to ~25% of clips.
-LLM cost: not measured (mock judge). Price table: 20 sats base, +10 low-confidence draft, +10 if > 6 s.
+LLM cost: ${LIVE ? `${judgeCalls.calls} judge API calls in §2 including retries (${judgeCalls.ok} ok${Object.keys(judgeCalls.byReason).length ? `, failed: ${JSON.stringify(judgeCalls.byReason)}` : ""}); ${verdicts.missing} submission(s) got no verdict after 4 tries and were scored without a judge. Token cost not metered by the app.` : "not measured (mock judge)."} Price table: 20 sats base, +10 low-confidence draft, +10 if > 6 s.
 
-## 4. Latency (local, in-memory Postgres, mock judge)
+## 4. Latency (local, in-memory Postgres)
 
 | Step | n | p50 | p95 |
 |---|---|---|---|
-| Judge (mock) | ${fraud.judgeMs.n} | ${ms(fraud.judgeMs.p50)} | ${ms(fraud.judgeMs.p95)} |
+| Judge (${LIVE ? "Gemini API call" : "mock"}) | ${LIVE ? judgeCalls.calls : fraud.judgeMs.n} | ${LIVE ? ms(judgeCalls.p50Ms) : ms(fraud.judgeMs.p50)} | ${LIVE ? ms(judgeCalls.p95Ms) : ms(fraud.judgeMs.p95)} |
 | Full scoring per submission | ${sim.scoreMs.n} | ${ms(sim.scoreMs.p50)} | ${ms(sim.scoreMs.p95)} |
 
-Draft latency: not measured (\`pnpm drafts\` needs API keys).
+Full scoring uses the mock judge (simulation). Draft latency: printed per clip by \`pnpm drafts\`.
 
-## 5. Red team (full pipeline, attacker is the 3rd speaker after 2 honest ones)
+## 5. Red team (full pipeline, attacker is the 3rd speaker after 2 honest ones; judge: ${LIVE ? "Gemini" : "mock"})
 
 | # | Attack | Expected | Actual | |
 |---|---|---|---|---|
@@ -103,7 +167,8 @@ ${rt.map((r, i) => `| ${i + 1} | ${r.case} | ${r.expected} | ${r.actual} | ${r.p
 ## Known limits
 - 3 colluding keys that pass gold can agree on a wrong transcript. Mitigations: random assignment,
   ~25% hidden gold, sponsor spot checks, daily caps. Not simulated here.
-- The mock judge is keyword-based; the real Gemini judge will catch different things.
+- ${LIVE ? "The live judge is an LLM: results can vary slightly between runs." : "The mock judge is keyword-based; the real Gemini judge will catch different things."}
+- Fraud cases are builder-written; real attackers will be more varied.
 `;
 writeFileSync("eval/RESULTS.md", md);
 console.log("✓ eval/RESULTS.md");

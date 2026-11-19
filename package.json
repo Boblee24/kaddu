@@ -22,6 +22,7 @@
     "seed:clips": "tsx scripts/seed-clips.ts",
     "personas": "tsx scripts/personas.ts",
     "simulate": "tsx scripts/simulate.ts",
+    "checkpoint": "tsx scripts/checkpoint.ts",
     "eval": "tsx scripts/eval.ts",
     "fetch:wolof": "tsx scripts/fetch-wolof.ts",
     "fetch:yoruba": "tsx scripts/fetch-yoruba.ts",

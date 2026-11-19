@@ -1,7 +1,8 @@
 # Threat model: Kàddu
 
-Kàddu pays speakers small amounts of sats (20–40 per clip) to correct AI transcripts of Wolof, Yorùbá,
-Pidgin and Hausa. A sponsor funds payouts from their own Lightning wallet. The app never holds funds.
+Kàddu pays speakers small amounts of sats (20–40 per clip) to correct AI transcripts of Wolof, Yorùbá and
+Naija Pidgin (the backend also accepts Hausa, which has no seed clips). A sponsor funds payouts from their own
+Lightning wallet. The app never holds funds.
 
 ## Assets
 | Asset | Where it lives | Why it matters |
@@ -46,6 +47,10 @@ worker browser ──(signed Nostr events)──▶ Next.js API ──▶ Postgr
 | Admin takeover | Constant-time token compare; cookie = HMAC(token), httpOnly, SameSite=Strict, Secure on https; login rate-limited (5, then 1 per 20 s). | `sponsor.test.ts` |
 | Malicious uploads | Admin only; ≤200 KB, ≤15 s (parsed with music-metadata), MIME allowlist (`audio/ogg`, `audio/webm`, `audio/mpeg`, `audio/mp4`), id regex; served with `nosniff` and the stored MIME. | `sponsor.test.ts` |
 | XSS / injected scripts | Per-request nonce CSP from the starter (no inline styles either); exact relay origins only; React escaping; no `dangerouslySetInnerHTML`. | `csp.test.ts` |
+| Slow first NWC connection mistaken for a bad string | `connectWallet` retries once with a fresh client (15 s, then 30 s) and closes the stuck one; definitive wallet errors (UNAUTHORIZED, RESTRICTED…) don't retry. The sponsor wallet is cached only after a successful connect. | `connect.test.ts` |
+| Licence violation in the dataset | Licence per clip: Yorùbá clips come from CC BY-SA 4.0 audio, so their transcripts are exported and attested as CC BY-SA 4.0; everything else is CC-BY-4.0. Sources and checks recorded in `seed/LICENSES.md`. | `licenseFor()` in `score.ts`, `sponsorOps.ts` |
+| Workers misled about AI quality | Simulated placeholder drafts are stored with `draft_model = "simulated"` and the work screen labels them. | `assign.ts`, `/work` |
+| Supply chain in the seed pipeline | Audio conversion uses the pinned `ffmpeg-static` binary (no system ffmpeg); downloads are read with HTTP range requests from the dataset hosts only; the scripts run on the builder's machine, never on the server. | `scripts/_seedlib.ts` |
 | Flooding | In-memory token buckets keyed by a salted hash of IP + user agent: `/api/next` 30 (1/s), `/api/corrections` 20 (1 per 2 s), `/api/claim` 5 (1 per 10 s), `/api/balance` 30, sponsor login 5, upload 30. Request bodies capped (4 KB JSON). | `lib/http.ts` |
 | PII in logs | Allowlisted logger only (`event, id, paymentHash, latencyMs, status, code, count`); eslint bans `console`; a test runs the whole pipeline and checks that no transcript, pubkey, invoice or token reaches the log. | `log-audit.test.ts`, `log.test.ts` |
 
@@ -56,8 +61,11 @@ worker browser ──(signed Nostr events)──▶ Next.js API ──▶ Postgr
 - **Pubkeys are public** (`/api/balance` and the export show them). They are pseudonymous: no name,
   phone or email is ever collected.
 - **The mock judge** (offline demo) is keyword-based. With a Gemini key the real judge is used.
-- **Voices** in seed data come from a licensed dataset or friends who consented in writing
-  (`seed/LICENSES.md`); voices can still identify a person.
+- **Drafts are simulated** in the demo, so draft-quality numbers say nothing about real ASR yet.
+- **The live payout path** was checked end to end on the local stack (`pnpm checkpoint`: 100 sats settled into the
+  worker wallet). The deployed Neon + Vercel stack runs the same code but has not been through `pnpm checkpoint --base <url>` yet.
+- **Voices** in seed data come from openly licensed datasets (galsenai Wolof, Apache-2.0; OpenSLR SLR86
+  Yorùbá, CC BY-SA 4.0) or from the author's own recordings (`seed/LICENSES.md`); voices can still identify a person.
 
 ## What we log / never log
 - **Log:** event name, correction/clip ids, paymentHash, latencyMs, status, reject code, counts.

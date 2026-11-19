@@ -1,6 +1,6 @@
 "use client";
 import { useCallback, useEffect, useState, type FormEvent } from "react";
-import { BigButton } from "@sats/ui";
+import { BigButton } from "@sats/ui/lite";
 
 type Overview = {
   byStatus: Array<{ lang: string; status: string; n: number }>;
@@ -13,7 +13,7 @@ type Overview = {
 };
 type Disputed = Array<{ id: string; lang: string; draft: string; corrections: Array<{ id: string; text: string }> }>;
 
-const card = "w-full rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-4";
+const card = "w-full rounded-3xl border-2 border-[var(--border)] bg-[var(--surface)] p-5";
 
 function Meter({ used, total, label }: { used: number; total: number; label: string }) {
   const pct = total > 0 ? Math.min(100, Math.round((used / total) * 100)) : 0;
@@ -89,7 +89,7 @@ export default function SponsorPage() {
   if (!authed)
     return (
       <form onSubmit={login} className={`${card} flex max-w-md flex-col gap-3`}>
-        <h1 className="text-xl font-bold">Sponsor console</h1>
+        <h1 className="font-display text-3xl">Sponsor console</h1>
         <label className="flex flex-col gap-1">
           Admin token
           <input name="token" type="password" autoComplete="current-password" required className="min-h-12 rounded-xl border border-[var(--border)] bg-[var(--bg)] px-3" />
@@ -105,8 +105,8 @@ export default function SponsorPage() {
   return (
     <section className="flex w-full max-w-2xl flex-col gap-4">
       <div className="flex items-center justify-between">
-        <h1 className="text-2xl font-bold">Sponsor console</h1>
-        <button className="underline" onClick={() => post("/api/sponsor/logout", {}).then(() => setAuthed(false))}>
+        <h1 className="font-display text-3xl">Sponsor console</h1>
+        <button className="min-h-12 px-2 font-semibold underline underline-offset-4" onClick={() => post("/api/sponsor/logout", {}).then(() => setAuthed(false))}>
           Sign out
         </button>
       </div>
@@ -114,7 +114,7 @@ export default function SponsorPage() {
 
       {o && (
         <div className={`${card} flex flex-col gap-3`}>
-          <h2 className="font-semibold">Budget</h2>
+          <h2 className="font-display text-xl">Budget</h2>
           <Meter used={o.spentToday} total={o.dailyCap} label="Paid + pending today (app cap)" />
           {o.budget ? (
             <Meter used={o.budget.usedSats} total={o.budget.totalSats} label="Sponsor wallet budget (NWC)" />
@@ -132,8 +132,8 @@ export default function SponsorPage() {
       )}
 
       <div className={card}>
-        <h2 className="mb-2 font-semibold">Clips</h2>
-        <table className="w-full text-sm">
+        <h2 className="font-display mb-2 text-xl">Clips</h2>
+        <table className="w-full text-base tabular-nums">
           <thead>
             <tr className="text-left">
               <th>Lang</th>
@@ -159,7 +159,7 @@ export default function SponsorPage() {
       </div>
 
       <div className={card}>
-        <h2 className="mb-2 font-semibold">Review disputed clips ({disputed.length})</h2>
+        <h2 className="font-display mb-2 text-xl">Review disputed clips ({disputed.length})</h2>
         {disputed.length === 0 && <p className="text-sm text-[var(--muted)]">Nothing to review.</p>}
         {disputed.map((d) => (
           <div key={d.id} className="mb-4 flex flex-col gap-2 border-t border-[var(--border)] pt-3">
@@ -173,7 +173,7 @@ export default function SponsorPage() {
             {d.corrections.map((c) => (
               <div key={c.id} className="flex items-center justify-between gap-2">
                 <span>{c.text}</span>
-                <button className="shrink-0 rounded-lg border border-[var(--border)] px-3 py-1" onClick={() => post("/api/sponsor/resolve", { clip_id: d.id, correction_id: c.id })}>
+                <button className="min-h-11 shrink-0 rounded-xl border-2 border-[var(--fg)] px-3 font-semibold" onClick={() => post("/api/sponsor/resolve", { clip_id: d.id, correction_id: c.id })}>
                   This is correct
                 </button>
               </div>
@@ -183,7 +183,7 @@ export default function SponsorPage() {
       </div>
 
       <form onSubmit={upload} className={`${card} flex flex-col gap-2`}>
-        <h2 className="font-semibold">Upload a clip</h2>
+        <h2 className="font-display text-xl">Upload a clip</h2>
         <p className="text-sm text-[var(--muted)]">≤15 s, ≤200 KB, ogg/webm/mp3/m4a. Only upload voices you have consent for.</p>
         <input name="file" type="file" accept="audio/ogg,audio/webm,audio/mpeg,audio/mp4" required />
         <input name="id" placeholder="id, e.g. wo_041" pattern="[a-z0-9_-]{1,64}" required className="min-h-11 rounded-xl border border-[var(--border)] bg-[var(--bg)] px-3" />

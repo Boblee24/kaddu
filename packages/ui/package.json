@@ -4,7 +4,8 @@
   "private": true,
   "type": "module",
   "exports": {
-    ".": "./src/index.ts"
+    ".": "./src/index.ts",
+    "./lite": "./src/lite.tsx"
   },
   "dependencies": {
     "@sats/core": "workspace:*",
@@ -14,5 +15,6 @@
   },
   "peerDependencies": {
     "react": ">=19"
-  }
+  },
+  "sideEffects": false
 }

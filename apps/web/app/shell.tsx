@@ -1,13 +1,21 @@
 "use client";
 import { createContext, useContext, useEffect, type ReactNode } from "react";
 import Link from "next/link";
-import { DemoBanner, LanguageSwitch, OfflineBanner, useLang } from "@sats/ui";
+import { usePathname } from "next/navigation";
+import { DemoBanner, OfflineBanner, useLang } from "@sats/ui/lite";
 
 const LangCtx = createContext<string>("en");
 export const useAppLang = () => useContext(LangCtx);
 
+const NAV = [
+  { href: "/scoreboard", label: "Scores" },
+  { href: "/wallet", label: "⚡ Wallet" },
+];
+
 export function Shell({ children, demo }: { children: ReactNode; demo: boolean; nonce?: string }) {
   const [lang, setLang] = useLang("en");
+  const path = usePathname();
+  const wide = path.startsWith("/sponsor") || path.startsWith("/scoreboard");
 
   useEffect(() => {
     if ("serviceWorker" in navigator && process.env.NODE_ENV === "production") {
@@ -17,23 +25,39 @@ export function Shell({ children, demo }: { children: ReactNode; demo: boolean; 
 
   return (
     <LangCtx.Provider value={lang}>
+      <div className="adire selvedge" aria-hidden />
       <DemoBanner show={demo} lang={lang} />
       <OfflineBanner lang={lang} />
-      <header className="mx-auto flex max-w-3xl items-center justify-between gap-3 px-4 py-3">
-        <Link href="/" className="text-lg font-bold">
-          ⚡ Kàddu
+      <header className={`mx-auto flex ${wide ? "max-w-3xl" : "max-w-md"} items-center justify-between gap-2 px-4 py-2`}>
+        <Link href="/" className="font-display -ml-1 flex min-h-12 items-center px-1 text-[1.65rem] leading-none">
+          Kàddu
         </Link>
-        <nav className="flex items-center gap-3">
-          <Link href="/scoreboard" className="font-medium underline-offset-4 hover:underline">
-            Scores
-          </Link>
-          <Link href="/wallet" className="font-medium underline-offset-4 hover:underline">
-            Wallet
-          </Link>
-          <LanguageSwitch value={lang} onChange={setLang} />
+        <nav className="flex items-center gap-1">
+          {NAV.map((n) => (
+            <Link
+              key={n.href}
+              href={n.href}
+              aria-current={path === n.href ? "page" : undefined}
+              className="flex min-h-12 items-center whitespace-nowrap rounded-full px-2.5 text-base font-semibold aria-[current=page]:bg-[var(--surface-2)]"
+            >
+              {n.label}
+            </Link>
+          ))}
+          <label className="flex min-h-12 items-center">
+            <span className="sr-only">App language</span>
+            <select
+              value={lang}
+              onChange={(e) => setLang(e.target.value)}
+              className="min-h-10 rounded-full border-2 border-[var(--border)] bg-[var(--surface)] px-2 text-sm font-semibold"
+            >
+              <option value="en">EN</option>
+              <option value="pcm">Pidgin</option>
+              <option value="fr">FR</option>
+            </select>
+          </label>
         </nav>
       </header>
-      <main className="mx-auto flex max-w-3xl flex-col items-center gap-6 px-4 pb-16">{children}</main>
+      <main className={`mx-auto flex ${wide ? "max-w-3xl" : "max-w-md"} flex-col gap-6 px-4 pb-16`}>{children}</main>
     </LangCtx.Provider>
   );
 }

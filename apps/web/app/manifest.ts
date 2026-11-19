@@ -7,8 +7,8 @@ export default function manifest(): MetadataRoute.Manifest {
     description: "Fix AI transcripts, get paid in sats",
     start_url: "/",
     display: "standalone",
-    background_color: "#f7f5f0",
-    theme_color: "#f7931a",
+    background_color: "#f3ead7",
+    theme_color: "#1e2a78",
     icons: [{ src: "/icon.svg", sizes: "any", type: "image/svg+xml", purpose: "any" }],
   };
 }

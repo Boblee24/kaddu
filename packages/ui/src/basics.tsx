@@ -1,8 +1,9 @@
 "use client";
-import { useEffect, useRef, useState, type ButtonHTMLAttributes, type ReactNode } from "react";
+import { useEffect, useRef, useState } from "react";
 import { QRCodeSVG } from "qrcode.react";
 import { formatFiat, formatSats, priceFor, satsToFiat, t, type Fiat, type Rates } from "@sats/core";
-import { useOnline } from "./hooks";
+import { BigButton } from "./lite";
+export { BigButton, OfflineBanner, DemoBanner } from "./lite";
 
 /** "2,500 sats ≈ ₦3,750". Fiat is omitted until rates load. */
 export function SatsAmount({
@@ -23,31 +24,6 @@ export function SatsAmount({
       <span className={`${big} font-bold tabular-nums`}>{formatSats(sats)}</span>
       {fiat && <span className="text-sm text-[var(--muted)] tabular-nums">≈ {fiat}</span>}
     </span>
-  );
-}
-
-type BigButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
-  variant?: "primary" | "secondary" | "danger" | "ghost";
-  icon?: ReactNode;
-};
-
-/** 48px+ tap target, high contrast. */
-export function BigButton({ variant = "primary", icon, className = "", children, ...rest }: BigButtonProps) {
-  const styles = {
-    primary: "bg-[var(--accent)] text-[var(--accent-fg)] hover:brightness-110",
-    secondary: "bg-[var(--surface-2)] text-[var(--fg)] border border-[var(--border)] hover:brightness-95",
-    danger: "bg-[var(--danger)] text-white hover:brightness-110",
-    ghost: "bg-transparent text-[var(--fg)] underline-offset-4 hover:underline",
-  }[variant];
-  return (
-    <button
-      type="button"
-      className={`min-h-12 rounded-xl px-5 py-3 text-lg font-semibold inline-flex items-center justify-center gap-2 transition disabled:opacity-50 disabled:cursor-not-allowed focus-visible:outline-3 focus-visible:outline-offset-2 focus-visible:outline-[var(--focus)] ${styles} ${className}`}
-      {...rest}
-    >
-      {icon}
-      {children}
-    </button>
   );
 }
 
@@ -78,25 +54,6 @@ export function CopyButton({ text, lang = "en" }: { text: string; lang?: string 
     >
       {copied ? t("wallet.copied", lang) : t("wallet.copy", lang)}
     </BigButton>
-  );
-}
-
-export function OfflineBanner({ lang = "en" }: { lang?: string }) {
-  const online = useOnline();
-  if (online) return null;
-  return (
-    <div role="status" className="bg-[var(--warn)] text-black px-4 py-2 text-center text-sm font-medium">
-      {t("offline.banner", lang)}
-    </div>
-  );
-}
-
-export function DemoBanner({ lang = "en", show }: { lang?: string; show: boolean }) {
-  if (!show) return null;
-  return (
-    <div className="bg-[var(--surface-2)] border-b border-[var(--border)] px-4 py-1 text-center text-xs text-[var(--muted)]">
-      {t("demo.banner", lang)}
-    </div>
   );
 }
 

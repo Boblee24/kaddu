@@ -1,53 +1,68 @@
 @import "tailwindcss";
 @source "../../../packages/ui/src";
 
+/*
+ * Kàddu look: indigo adire cloth on warm paper.
+ * Adire is Yoruba resist-dyed indigo cloth; indigo dyeing runs through Senegal too. The pattern is pure
+ * CSS (no image bytes). High contrast throughout: ink on paper, cream on indigo.
+ * --accent is the primary action colour (shared @sats/ui buttons use it); --sats is for money only.
+ */
 :root {
-  --bg: #f7f5f0;
-  --surface: #ffffff;
-  --surface-2: #efece4;
-  --fg: #16140f;
-  --muted: #5c574c;
-  --border: #d9d4c7;
-  --accent: #f7931a; /* bitcoin orange */
-  --accent-fg: #16140f;
-  --ok: #138a36;
-  --danger: #c0262d;
-  --warn: #ffcf33;
-  --focus: #1d4ed8;
+  --bg: #f3ead7;
+  --surface: #fffaef;
+  --surface-2: #ebe0c8;
+  --fg: #141a3a;
+  --muted: #554f63;
+  --border: #c9b994;
+  --accent: #1e2a78;
+  --accent-fg: #fffaef;
+  --indigo: #1e2a78;
+  --indigo-deep: #121a52;
+  --cream: #fffaef;
+  --sats: #b9520a;
+  --ok: #17703a;
+  --danger: #b3261e;
+  --warn: #f2b632;
+  --focus: #e2690b;
+  --rule: rgb(30 42 120 / 0.13);
   color-scheme: light;
 }
 
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
-    --bg: #12110e;
-    --surface: #1c1a16;
-    --surface-2: #29261f;
-    --fg: #f4f1ea;
-    --muted: #b3ac9c;
-    --border: #3a362d;
-    --accent: #f7931a;
-    --accent-fg: #12110e;
-    --ok: #3ccf6a;
-    --danger: #ef4c53;
-    --warn: #ffcf33;
-    --focus: #8fb3ff;
+    --bg: #0b0f2c;
+    --surface: #141a44;
+    --surface-2: #1d2558;
+    --fg: #f6eedc;
+    --muted: #bdb6cc;
+    --border: #2f3a7a;
+    --accent: #f6eedc;
+    --accent-fg: #0b0f2c;
+    --sats: #ffa24f;
+    --ok: #57d685;
+    --danger: #ff7166;
+    --warn: #f2b632;
+    --focus: #ffa24f;
+    --rule: rgb(246 238 220 / 0.1);
     color-scheme: dark;
   }
 }
 
 :root[data-theme="dark"] {
-  --bg: #12110e;
-  --surface: #1c1a16;
-  --surface-2: #29261f;
-  --fg: #f4f1ea;
-  --muted: #b3ac9c;
-  --border: #3a362d;
-  --accent: #f7931a;
-  --accent-fg: #12110e;
-  --ok: #3ccf6a;
-  --danger: #ef4c53;
-  --warn: #ffcf33;
-  --focus: #8fb3ff;
+  --bg: #0b0f2c;
+  --surface: #141a44;
+  --surface-2: #1d2558;
+  --fg: #f6eedc;
+  --muted: #bdb6cc;
+  --border: #2f3a7a;
+  --accent: #f6eedc;
+  --accent-fg: #0b0f2c;
+  --sats: #ffa24f;
+  --ok: #57d685;
+  --danger: #ff7166;
+  --warn: #f2b632;
+  --focus: #ffa24f;
+  --rule: rgb(246 238 220 / 0.1);
   color-scheme: dark;
 }
 
@@ -58,7 +73,124 @@ html {
 body {
   background: var(--bg);
   color: var(--fg);
-  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  /* Noto Sans ships on most Androids and renders Yorùbá dot-below + tone marks well. */
+  font-family: "Noto Sans", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
   font-size: 18px;
   line-height: 1.5;
+}
+
+.font-display {
+  font-family: var(--font-display), Georgia, "Times New Roman", serif;
+  font-optical-sizing: auto;
+  letter-spacing: -0.01em;
+}
+
+/* ---- adire cloth ----------------------------------------------------------------------------- */
+.adire {
+  background-color: var(--indigo);
+  background-image:
+    radial-gradient(circle, transparent 0 5px, rgb(255 250 239 / 0.55) 5px 6.5px, transparent 7px),
+    radial-gradient(circle, rgb(255 250 239 / 0.6) 0 1.6px, transparent 2px),
+    linear-gradient(45deg, transparent 47%, rgb(255 250 239 / 0.18) 47% 53%, transparent 53%);
+  background-size:
+    28px 28px,
+    14px 14px,
+    28px 28px;
+  background-position:
+    0 0,
+    7px 7px,
+    14px 0;
+}
+/* the selvedge strip across the top of every page */
+.selvedge {
+  height: 10px;
+}
+.adire-text {
+  color: var(--cream);
+}
+
+/* lined dictation paper behind the transcript box */
+.lined {
+  background-color: var(--surface);
+  background-image: repeating-linear-gradient(to bottom, transparent 0 calc(2.6rem - 1px), var(--rule) calc(2.6rem - 1px) 2.6rem);
+  background-attachment: local;
+  background-position: 0 0.85rem;
+  line-height: 2.6rem;
+}
+
+/* hand-cut ticket edge for the price tag */
+.ticket {
+  border: 2px dashed currentColor;
+}
+
+/* ---- motion (all of it is skipped for reduced-motion users) -------------------------------------- */
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@keyframes pop {
+  0% {
+    transform: scale(0.6) rotate(-6deg);
+    opacity: 0;
+  }
+  60% {
+    transform: scale(1.12) rotate(2deg);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1) rotate(-2deg);
+  }
+}
+@keyframes ripple {
+  from {
+    transform: scale(1);
+    opacity: 0.55;
+  }
+  to {
+    transform: scale(1.45);
+    opacity: 0;
+  }
+}
+.rise {
+  animation: rise 0.45s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+.d1 {
+  animation-delay: 0.06s;
+}
+.d2 {
+  animation-delay: 0.12s;
+}
+.d3 {
+  animation-delay: 0.18s;
+}
+.d4 {
+  animation-delay: 0.24s;
+}
+.pop {
+  animation: pop 0.55s cubic-bezier(0.2, 0.9, 0.3, 1.3) both;
+}
+.ripple::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 9999px;
+  border: 3px solid var(--sats);
+  animation: ripple 1.2s ease-out infinite;
+}
+@media (prefers-reduced-motion: reduce) {
+  .rise,
+  .pop,
+  .ripple::after {
+    animation: none;
+  }
+}
+
+progress {
+  accent-color: var(--accent);
 }

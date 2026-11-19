@@ -73,7 +73,7 @@ export function WalletPanel({
   if (conn.status === "loading") return <Card><p className="text-[var(--muted)]">…</p></Card>;
 
   if (conn.status !== "connected" || !conn.wallet || !conn.info) {
-    return <ConnectForm lang={lang} busy={conn.status === "connecting"} error={errText(conn.error, lang)} onConnect={conn.connect} />;
+    return <ConnectForm lang={lang} busy={conn.status === "connecting"} retrying={conn.retrying} error={errText(conn.error, lang)} onConnect={conn.connect} />;
   }
 
   const { wallet, info } = conn;
@@ -138,7 +138,7 @@ function Card({ children }: { children: ReactNode }) {
   return <section className="flex w-full max-w-md flex-col gap-4 rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-4 shadow-sm">{children}</section>;
 }
 
-function ConnectForm({ lang, busy, error, onConnect }: { lang: string; busy: boolean; error: string; onConnect: (u: string) => Promise<boolean> }) {
+function ConnectForm({ lang, busy, retrying, error, onConnect }: { lang: string; busy: boolean; retrying?: boolean; error: string; onConnect: (u: string) => Promise<boolean> }) {
   const [url, setUrl] = useState("");
   return (
     <Card>
@@ -155,6 +155,7 @@ function ConnectForm({ lang, busy, error, onConnect }: { lang: string; busy: boo
         />
       </label>
       {error && <p role="alert" className="text-[var(--danger)]">{error}</p>}
+      {retrying && <p role="status" className="text-sm text-[var(--muted)]">Still connecting… the wallet&apos;s relay is slow to answer the first time.</p>}
       <div className="flex flex-wrap gap-2">
         <BigButton disabled={busy || !url.trim()} onClick={() => void onConnect(url)}>
           {busy ? "…" : t("wallet.connect", lang)}

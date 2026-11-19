@@ -2,13 +2,9 @@
 import { useCallback, useEffect, useState } from "react";
 import { get, set, del } from "idb-keyval";
 import { errorCode, isLang, type Lang, type Rates } from "@sats/core";
-import { createWallet, parseNwcUrl, type Wallet, type WalletInfo } from "@sats/lightning";
+import { connectWallet, parseNwcUrl, type Wallet, type WalletInfo } from "@sats/lightning";
 
 export type ConnStatus = "loading" | "disconnected" | "connecting" | "connected" | "error";
-
-function withTimeout<T>(p: Promise<T>, ms: number): Promise<T> {
-  return Promise.race([p, new Promise<T>((_, rej) => setTimeout(() => rej(Object.assign(new Error("t"), { code: "TIMEOUT" })), ms))]);
-}
 
 /**
  * An NWC connection stored ONLY in this browser's IndexedDB under `sats:nwc:<slot>`.
@@ -20,6 +16,8 @@ export function useWalletConnection(slot = "wallet") {
   const [wallet, setWallet] = useState<Wallet | null>(null);
   const [info, setInfo] = useState<WalletInfo | null>(null);
   const [error, setError] = useState<string | null>(null);
+  /** True while the second (longer) connection attempt runs, so the UI can say "still connecting…". */
+  const [retrying, setRetrying] = useState(false);
 
   const connect = useCallback(
     async (nwcUrl: string, persist = true) => {
@@ -32,19 +30,21 @@ export function useWalletConnection(slot = "wallet") {
         return false;
       }
       setStatus("connecting");
-      const w = createWallet(nwcUrl);
+      setRetrying(false);
       try {
-        const i = await withTimeout(w.info(), 15_000);
+        // A cold relay connection can miss the first timeout; connectWallet retries once (15 s, then 30 s).
+        const { wallet: w, info: i } = await connectWallet(nwcUrl, { onRetry: () => setRetrying(true) });
         if (persist) await set(key, nwcUrl.trim());
         setWallet(w);
         setInfo(i);
         setStatus("connected");
         return true;
       } catch (err) {
-        w.close();
         setError(errorCode(err));
         setStatus("error");
         return false;
+      } finally {
+        setRetrying(false);
       }
     },
     [key],
@@ -74,7 +74,7 @@ export function useWalletConnection(slot = "wallet") {
 
   useEffect(() => () => wallet?.close(), [wallet]);
 
-  return { status, wallet, info, error, connect, disconnect };
+  return { status, wallet, info, error, retrying, connect, disconnect };
 }
 
 let ratesCache: { at: number; rates: Rates } | null = null;

@@ -5,7 +5,8 @@ import { fraudEval, redTeam } from "./evalrun";
 
 setLogSink(() => {});
 
-describe("eval (synthetic data, mock judge)", () => {
+// Runs the whole pipeline many times on PGlite: slow under parallel test load.
+describe("eval (synthetic data, mock judge)", { timeout: 180_000 }, () => {
   it("fraud.json has 30 bad and 50 good cases; no good case is flagged", async () => {
     const clips = evalClips();
     const cases = fraudCases(clips);

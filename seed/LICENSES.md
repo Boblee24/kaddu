@@ -1,17 +1,16 @@
 # Seed audio: sources and licences
 
-Fill this in before committing any audio. Voices are personal data.
+Voices are personal data. Every clip below comes from an openly licensed dataset or from the author.
 
-| Clips | Source | Licence | Notes |
-|---|---|---|---|
-| `wo_*` | Hugging Face `galsenai/wolof-audio-data` | **TODO: check the dataset page** | ≤40 clips, 3–10 s |
-| `yo_*` | Recorded by consenting friends | CC-BY-4.0 (contributors' written consent) | |
-| `pcm_*` | Recorded by consenting friends | CC-BY-4.0 (contributors' written consent) | |
+| Clips | Source | Licence of the audio | Licence of Kàddu transcripts | How fetched |
+|---|---|---|---|---|
+| `wo_001`–`wo_040` | Hugging Face `galsenai/wolof-audio-data` (test split; sub-sources kallama, alffa, urban_bus) | Apache-2.0 | CC-BY-4.0 | `pnpm fetch:wolof` |
+| `yo_001`–`yo_040` | OpenSLR SLR86, Google crowdsourced Yoruba (20 female + 20 male clips) | CC BY-SA 4.0 | **CC BY-SA 4.0** (share-alike; set per clip in the export and attestation) | `pnpm fetch:yoruba` |
+| `pcm_01`–`pcm_20` | Recorded by the project author from `pcm_script.md` | CC-BY-4.0 (author's own) | CC-BY-4.0 | `pnpm pcm:import` |
 
-Contributor consent covers: clips go into an open CC-BY-4.0 dataset and are processed by AI services
-(Google Gemini, Spitch). Contributors (pseudonyms are fine):
-
-- TODO
+Hausa has no seed clips (dropped for time); the backend still supports `ha`.
+All clips: trimmed of leading/trailing silence, converted to 16 kHz mono Opus (16 kb/s) with ffmpeg-static.
+The AI services that process clips are Google Gemini (drafts, judge) when a key is configured.
 
 ## Sources checked 2026-11-18
 - **Wolof:** Hugging Face `galsenai/wolof-audio-data`, **Apache-2.0**, not gated. https://huggingface.co/datasets/galsenai/wolof-audio-data

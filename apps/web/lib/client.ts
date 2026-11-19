@@ -1,6 +1,7 @@
 "use client";
 /** Browser helpers: consent + language preference (localStorage, wrapped: it can throw in private mode). */
-export const LANG_LABELS = { wo: "Wolof", yo: "Yorùbá", pcm: "Naija Pidgin", ha: "Hausa" } as const;
+/** Languages offered to workers. Hausa is supported by the backend but has no seed clips yet. */
+export const LANG_LABELS = { wo: "Wolof", yo: "Yorùbá", pcm: "Naija Pidgin" } as const;
 export type WorkLang = keyof typeof LANG_LABELS;
 
 const CONSENT_KEY = "kaddu:consent:v1";

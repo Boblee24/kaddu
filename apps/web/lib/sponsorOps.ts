@@ -6,7 +6,7 @@ import { attestations, clips, corrections, settings } from "./db/schema";
 import { ClipId, Lang } from "./protocol";
 import { priceSats } from "./pricing";
 import { durationMs, MAX_CLIP_BYTES, MAX_CLIP_MS } from "./seed";
-import { LICENSE } from "./score";
+import { licenseFor } from "./score";
 
 // ---- pause switch -------------------------------------------------------------------------------
 
@@ -119,7 +119,7 @@ export async function exportJsonl(db: Db): Promise<string> {
         consensus_text: d.text,
         contributors: who.map((w) => w.pk).sort(),
         attestation_event_id: d.eventId ?? null,
-        license: LICENSE,
+        license: licenseFor(d.lang),
       }),
     );
   }

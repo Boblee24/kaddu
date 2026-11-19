@@ -28,7 +28,7 @@ async function goldDone(db: Db, pubkey: string): Promise<number> {
 
 async function pick(db: Db, o: { pubkey: string; lang: Lang; gold: boolean }) {
   const [row] = await db
-    .select({ id: clips.id, lang: clips.lang, durationMs: clips.durationMs, draftText: clips.draftText, priceSats: clips.priceSats })
+    .select({ id: clips.id, lang: clips.lang, durationMs: clips.durationMs, draftText: clips.draftText, draftModel: clips.draftModel, priceSats: clips.priceSats })
     .from(clips)
     .where(
       and(
@@ -56,5 +56,6 @@ export async function nextClip(db: Db, o: { pubkey: string; lang: Lang; random?:
   // Qualification needs gold; if none is left, fall through to regular clips (and vice versa).
   const row = (await pick(db, { ...o, gold: wantGold })) ?? (await pick(db, { ...o, gold: !wantGold }));
   if (!row) return null;
-  return { ...row, audioUrl: `/api/clips/${row.id}/audio` };
+  const { draftModel, ...rest } = row;
+  return { ...rest, draftSimulated: draftModel === "simulated", audioUrl: `/api/clips/${row.id}/audio` };
 }

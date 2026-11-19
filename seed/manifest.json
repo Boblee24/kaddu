@@ -1,0 +1,562 @@
+[
+  {
+    "id": "wo_001",
+    "lang": "wo",
+    "file": "clips/wo/wo_001.ogg",
+    "truth_text": "kànja gi mu saam bokkewul ak gi ci pañe bi",
+    "is_gold": true
+  },
+  {
+    "id": "wo_002",
+    "lang": "wo",
+    "file": "clips/wo/wo_002.ogg",
+    "truth_text": "Naka la agsi ci kër gi rekk dal di bëcci sayu matt wa",
+    "is_gold": true
+  },
+  {
+    "id": "wo_003",
+    "lang": "wo",
+    "file": "clips/wo/wo_003.ogg",
+    "truth_text": "maa ngiy jékkiji ba ëllëg ci sarax si",
+    "is_gold": false
+  },
+  {
+    "id": "wo_004",
+    "lang": "wo",
+    "file": "clips/wo/wo_004.ogg",
+    "truth_text": "Na nga mëna lekke ci taabal bu dër bii",
+    "is_gold": false
+  },
+  {
+    "id": "wo_005",
+    "lang": "wo",
+    "file": "clips/wo/wo_005.ogg",
+    "truth_text": "duma toog ci seen diggante ngeen di ma tanc",
+    "is_gold": true
+  },
+  {
+    "id": "wo_006",
+    "lang": "wo",
+    "file": "clips/wo/wo_006.ogg",
+    "truth_text": "parce que ñoom tamit climat bi daf leen sobal trop te seetlu ngeen ni gëj nañu dégg ñu ni nappkat yi dem nañu géej ngelaw la bett na leen",
+    "is_gold": false
+  },
+  {
+    "id": "wo_007",
+    "lang": "wo",
+    "file": "clips/wo/wo_007.ogg",
+    "truth_text": "Terminus Daroukhane laa bëgg dem",
+    "is_gold": false
+  },
+  {
+    "id": "wo_008",
+    "lang": "wo",
+    "file": "clips/wo/wo_008.ogg",
+    "truth_text": "surtout actuellement nii nga xam ne doo on est en alerte rouge",
+    "is_gold": false
+  },
+  {
+    "id": "wo_009",
+    "lang": "wo",
+    "file": "clips/wo/wo_009.ogg",
+    "truth_text": "pour li waay noonu wax li nga jàng ba xam ko rek nga mën a xam moom",
+    "is_gold": true
+  },
+  {
+    "id": "wo_010",
+    "lang": "wo",
+    "file": "clips/wo/wo_010.ogg",
+    "truth_text": "soo may jéema kekkantoo ma teg la sa palaas",
+    "is_gold": false
+  },
+  {
+    "id": "wo_011",
+    "lang": "wo",
+    "file": "clips/wo/wo_011.ogg",
+    "truth_text": "réew mi dafa meloon ni garab goo xam ne dafa ngal",
+    "is_gold": false
+  },
+  {
+    "id": "wo_012",
+    "lang": "wo",
+    "file": "clips/wo/wo_012.ogg",
+    "truth_text": "taxawal fii yiir ma ndax ma mën walbati sama mbubb",
+    "is_gold": false
+  },
+  {
+    "id": "wo_013",
+    "lang": "wo",
+    "file": "clips/wo/wo_013.ogg",
+    "truth_text": "mais am na mboq bu ñu fi bu ñu fi bu ñu fi buñ fi dugal mboq bi aussi day def quarante sept jours lay def quarante sept jours",
+    "is_gold": true
+  },
+  {
+    "id": "wo_014",
+    "lang": "wo",
+    "file": "clips/wo/wo_014.ogg",
+    "truth_text": "am nañu njëriñ pour gàncax gi ndax du sax sax yëppay yàq",
+    "is_gold": false
+  },
+  {
+    "id": "wo_015",
+    "lang": "wo",
+    "file": "clips/wo/wo_015.ogg",
+    "truth_text": "yile xalat dañ wone ni nit ñi am nañu ay soxla ak/wala bëgg-bëgg yuñu dugal ci seen biir bopp biñu nekkee ay mag",
+    "is_gold": false
+  },
+  {
+    "id": "wo_016",
+    "lang": "wo",
+    "file": "clips/wo/wo_016.ogg",
+    "truth_text": "ba mu ko sànnee nen ba sóppaliku géej gu rëya rëy",
+    "is_gold": false
+  },
+  {
+    "id": "wo_017",
+    "lang": "wo",
+    "file": "clips/wo/wo_017.ogg",
+    "truth_text": "da ngay gis nit ñu waxoon nañ ñu da ngay gis ay melentaan yoo xam ne",
+    "is_gold": true
+  },
+  {
+    "id": "wo_018",
+    "lang": "wo",
+    "file": "clips/wo/wo_018.ogg",
+    "truth_text": "macha ar allah ar y a une question que j ai pas",
+    "is_gold": false
+  },
+  {
+    "id": "wo_019",
+    "lang": "wo",
+    "file": "clips/wo/wo_019.ogg",
+    "truth_text": "ba ko soxna sa wonnee la wewu gaynde ga galanu ca put ga",
+    "is_gold": false
+  },
+  {
+    "id": "wo_020",
+    "lang": "wo",
+    "file": "clips/wo/wo_020.ogg",
+    "truth_text": "lërén bi lu baax la ci liir bi dafa ko wara nàmp",
+    "is_gold": false
+  },
+  {
+    "id": "wo_021",
+    "lang": "wo",
+    "file": "clips/wo/wo_021.ogg",
+    "truth_text": "taw bi du bëri ngay dem di utijiw boo xam nidafa dafa gudd",
+    "is_gold": true
+  },
+  {
+    "id": "wo_022",
+    "lang": "wo",
+    "file": "clips/wo/wo_022.ogg",
+    "truth_text": "loolu moo tax boo bëggee bokk ugpm ni ñu ko waxee condition bu njëkk bi",
+    "is_gold": false
+  },
+  {
+    "id": "wo_023",
+    "lang": "wo",
+    "file": "clips/wo/wo_023.ogg",
+    "truth_text": "ba nga xam ne donc dina am lu bëre loo xam ne dinañ ko topp dinañ ko kii quoi deqi ci wàllu gerte wala góob ci wàllu dugub",
+    "is_gold": false
+  },
+  {
+    "id": "wo_024",
+    "lang": "wo",
+    "file": "clips/wo/wo_024.ogg",
+    "truth_text": "magane jóge ci loolu ndoon sëriñu dàmmel",
+    "is_gold": false
+  },
+  {
+    "id": "wo_025",
+    "lang": "wo",
+    "file": "clips/wo/wo_025.ogg",
+    "truth_text": "parce que loolu si changement climatique yi ngeen wax ci lañ ci ci lañu sukkandiku tëgg projet bi",
+    "is_gold": true
+  },
+  {
+    "id": "wo_026",
+    "lang": "wo",
+    "file": "clips/wo/wo_026.ogg",
+    "truth_text": "loolu pour dëggal li mu wax la pour wane ne gëstu wane na ko ba noppi",
+    "is_gold": false
+  },
+  {
+    "id": "wo_027",
+    "lang": "wo",
+    "file": "clips/wo/wo_027.ogg",
+    "truth_text": "kóllëre gu yàgg a nekk diggante bàkkel ak ndar",
+    "is_gold": false
+  },
+  {
+    "id": "wo_028",
+    "lang": "wo",
+    "file": "clips/wo/wo_028.ogg",
+    "truth_text": "prace que picc ku ne xam na ni fu mu dugg bu yàggee daf fay tagg",
+    "is_gold": false
+  },
+  {
+    "id": "wo_029",
+    "lang": "wo",
+    "file": "clips/wo/wo_029.ogg",
+    "truth_text": "ci jamono bi ñu nekk et bépp prpjet boo xam ne daf ciy yëngatu rek je pense acteurs yi ci war a jàpp yëpp dañ ci war a jàpp",
+    "is_gold": true
+  },
+  {
+    "id": "wo_030",
+    "lang": "wo",
+    "file": "clips/wo/wo_030.ogg",
+    "truth_text": "keroog yowmalxayaam ñépp dinañu dekki",
+    "is_gold": false
+  },
+  {
+    "id": "wo_031",
+    "lang": "wo",
+    "file": "clips/wo/wo_031.ogg",
+    "truth_text": "maanaam banque agricole wala lu mel ne que mutuelle yi comme mutuelle yi ñu limoon yi mutuelle u limoon sànq",
+    "is_gold": false
+  },
+  {
+    "id": "wo_032",
+    "lang": "wo",
+    "file": "clips/wo/wo_032.ogg",
+    "truth_text": "mbër maa ngi ci diggu géew bi suq yi dar ko",
+    "is_gold": false
+  },
+  {
+    "id": "wo_033",
+    "lang": "wo",
+    "file": "clips/wo/wo_033.ogg",
+    "truth_text": "Station Shell Keur Massar",
+    "is_gold": true
+  },
+  {
+    "id": "wo_034",
+    "lang": "wo",
+    "file": "clips/wo/wo_034.ogg",
+    "truth_text": "léegi loolu askan bi bu ñu ko jëlee dégg nga duñ yem foofu ñun bu ñu waxalee askan wi ba pare dañu leen dañu leen di orienté",
+    "is_gold": false
+  },
+  {
+    "id": "wo_035",
+    "lang": "wo",
+    "file": "clips/wo/wo_035.ogg",
+    "truth_text": "bi loolu di am nag fekk na guddi jot na",
+    "is_gold": false
+  },
+  {
+    "id": "wo_036",
+    "lang": "wo",
+    "file": "clips/wo/wo_036.ogg",
+    "truth_text": "peeg naa ko ba mu may ma benn ci montaram yu bare yi",
+    "is_gold": false
+  },
+  {
+    "id": "wo_037",
+    "lang": "wo",
+    "file": "clips/wo/wo_037.ogg",
+    "truth_text": "te dafa ma néwoon lu yàgga yàgg bul wàcc",
+    "is_gold": true
+  },
+  {
+    "id": "wo_038",
+    "lang": "wo",
+    "file": "clips/wo/wo_038.ogg",
+    "truth_text": "parce que ñun ñëpp xam nañu njeexital bi nga xam ne production chimique dañ dañ ko am ci alam bi",
+    "is_gold": false
+  },
+  {
+    "id": "wo_039",
+    "lang": "wo",
+    "file": "clips/wo/wo_039.ogg",
+    "truth_text": "kon daal maa ngi yemale foofu nuyoo bi ba ci kanam di ñaan yàlla ci gàmmu gi nga xam ne moom la ñu paase itam",
+    "is_gold": false
+  },
+  {
+    "id": "wo_040",
+    "lang": "wo",
+    "file": "clips/wo/wo_040.ogg",
+    "truth_text": "Mosquée Massalikoul Jinan",
+    "is_gold": false
+  },
+  {
+    "id": "yo_001",
+    "lang": "yo",
+    "file": "clips/yo/yo_001.ogg",
+    "truth_text": "Fálétí ti lọ ra àwọn ṣòkòtò ní ọjà Èjìgbò.",
+    "is_gold": true
+  },
+  {
+    "id": "yo_002",
+    "lang": "yo",
+    "file": "clips/yo/yo_002.ogg",
+    "truth_text": "Kí gbogbo ayé ó wá bá wa dá sí ọ̀rọ̀ yìí, kó tó polúkúrúmuṣu.",
+    "is_gold": true
+  },
+  {
+    "id": "yo_003",
+    "lang": "yo",
+    "file": "clips/yo/yo_003.ogg",
+    "truth_text": "Màmá rán mi kí n lọ ra ẹja díndín wá ní ìsọdá.",
+    "is_gold": false
+  },
+  {
+    "id": "yo_004",
+    "lang": "yo",
+    "file": "clips/yo/yo_004.ogg",
+    "truth_text": "Ẹ wo omi tó sọ póun ò ní bá ẹja rẹ́, àṣé omi ọ̀hún ni yóò ṣekú pẹ́ja.",
+    "is_gold": false
+  },
+  {
+    "id": "yo_005",
+    "lang": "yo",
+    "file": "clips/yo/yo_005.ogg",
+    "truth_text": "Wọ́n ti mú Èmánúẹ̀lì lọ sí ibi tí yóò ti kọ́ bí wọ́n ti ń ṣe bàtà.",
+    "is_gold": true
+  },
+  {
+    "id": "yo_006",
+    "lang": "yo",
+    "file": "clips/yo/yo_006.ogg",
+    "truth_text": "Màá ṣe iṣẹ́ náà nítorí ó dá lé orí àwọn ìwé Fágúnwà.",
+    "is_gold": false
+  },
+  {
+    "id": "yo_007",
+    "lang": "yo",
+    "file": "clips/yo/yo_007.ogg",
+    "truth_text": "Oko obì lọ́tun, ti ọ̀gẹ̀dẹ̀ lósì.",
+    "is_gold": false
+  },
+  {
+    "id": "yo_008",
+    "lang": "yo",
+    "file": "clips/yo/yo_008.ogg",
+    "truth_text": "Dáadáa ló yẹ ká máa ṣe.",
+    "is_gold": false
+  },
+  {
+    "id": "yo_009",
+    "lang": "yo",
+    "file": "clips/yo/yo_009.ogg",
+    "truth_text": "Ṣé o ti rí abọ́ ẹlẹ́ta rí?",
+    "is_gold": true
+  },
+  {
+    "id": "yo_010",
+    "lang": "yo",
+    "file": "clips/yo/yo_010.ogg",
+    "truth_text": "Àkàyìmọye ìwé ni Ọ̀jọ̀gbọ́n Ajíbóyè Ọládìípò ti kọ.",
+    "is_gold": false
+  },
+  {
+    "id": "yo_011",
+    "lang": "yo",
+    "file": "clips/yo/yo_011.ogg",
+    "truth_text": "Olórí ilé aṣòfin wà ní agbègbè náà.",
+    "is_gold": false
+  },
+  {
+    "id": "yo_012",
+    "lang": "yo",
+    "file": "clips/yo/yo_012.ogg",
+    "truth_text": "Oògùn abẹnu gọ̀ǹgọ̀ ni wọ́n ń pèé.",
+    "is_gold": false
+  },
+  {
+    "id": "yo_013",
+    "lang": "yo",
+    "file": "clips/yo/yo_013.ogg",
+    "truth_text": "Kò ye ká máa sọ̀rọ̀ ṣàkàṣàkà torí a ò mọ ẹni tó lè ranni lọ́wọ́.",
+    "is_gold": true
+  },
+  {
+    "id": "yo_014",
+    "lang": "yo",
+    "file": "clips/yo/yo_014.ogg",
+    "truth_text": "Àwọn bàbá bàba mi ló tẹ ìlé yi dó.",
+    "is_gold": false
+  },
+  {
+    "id": "yo_015",
+    "lang": "yo",
+    "file": "clips/yo/yo_015.ogg",
+    "truth_text": "Alájápá ni iṣẹ́ tí Lọlá ń ṣe kó tó wọ iṣẹ́ Ọlọ́pàá.",
+    "is_gold": false
+  },
+  {
+    "id": "yo_016",
+    "lang": "yo",
+    "file": "clips/yo/yo_016.ogg",
+    "truth_text": "Kòkòrò ààrùn tí ò gbóògun ti pọ̀ ní ìlú yìí.",
+    "is_gold": false
+  },
+  {
+    "id": "yo_017",
+    "lang": "yo",
+    "file": "clips/yo/yo_017.ogg",
+    "truth_text": "Olódùmarè ní kí ẹ má sin òrìṣà kankan lẹ́yìn òun.",
+    "is_gold": true
+  },
+  {
+    "id": "yo_018",
+    "lang": "yo",
+    "file": "clips/yo/yo_018.ogg",
+    "truth_text": "Wọ́n máa ń lo orin dadakùádà lati fi ki oríkì ènìyàn.",
+    "is_gold": false
+  },
+  {
+    "id": "yo_019",
+    "lang": "yo",
+    "file": "clips/yo/yo_019.ogg",
+    "truth_text": "Ìyá Fátúrótì ni ó ń se ìnáwó lọ́jọ́ yẹn.",
+    "is_gold": false
+  },
+  {
+    "id": "yo_020",
+    "lang": "yo",
+    "file": "clips/yo/yo_020.ogg",
+    "truth_text": "Ṣé o lè rìn kíá ju báyi lọ?",
+    "is_gold": false
+  },
+  {
+    "id": "yo_021",
+    "lang": "yo",
+    "file": "clips/yo/yo_021.ogg",
+    "truth_text": "Tọkọtaya ara ilẹ̀kùn náà ti bàjẹ́.",
+    "is_gold": true
+  },
+  {
+    "id": "yo_022",
+    "lang": "yo",
+    "file": "clips/yo/yo_022.ogg",
+    "truth_text": "Akáloló ni Bídèmí nígbà tí ó ṣì kéré ṣùgbọ́n ó ti yàtọ̀ díẹ̀ ní sìnyí.",
+    "is_gold": false
+  },
+  {
+    "id": "yo_023",
+    "lang": "yo",
+    "file": "clips/yo/yo_023.ogg",
+    "truth_text": "Ṣe ìlérí fún mi pé ò ní fi mí sílẹ̀.",
+    "is_gold": false
+  },
+  {
+    "id": "yo_024",
+    "lang": "yo",
+    "file": "clips/yo/yo_024.ogg",
+    "truth_text": "Òyìnbó bí ọ̀pẹ́ẹ̀rẹ́ ni ó máa ń sọ ní tirẹ̀.",
+    "is_gold": false
+  },
+  {
+    "id": "yo_025",
+    "lang": "yo",
+    "file": "clips/yo/yo_025.ogg",
+    "truth_text": "Ẹni tó ti kú ò ní ìrèti mọ́.",
+    "is_gold": true
+  },
+  {
+    "id": "yo_026",
+    "lang": "yo",
+    "file": "clips/yo/yo_026.ogg",
+    "truth_text": "Ẹ̀rọ ayárabíàṣá ni mo fi ṣe iṣẹ́ náà.",
+    "is_gold": false
+  },
+  {
+    "id": "yo_027",
+    "lang": "yo",
+    "file": "clips/yo/yo_027.ogg",
+    "truth_text": "Ìwé mẹ́rin ni ọ̀gbẹ́ni Caleb ní ka rà.",
+    "is_gold": false
+  },
+  {
+    "id": "yo_028",
+    "lang": "yo",
+    "file": "clips/yo/yo_028.ogg",
+    "truth_text": "Ẹ fi ṣàkì mẹ́ta sórí ìrẹsì àkọ́kọ́.",
+    "is_gold": false
+  },
+  {
+    "id": "yo_029",
+    "lang": "yo",
+    "file": "clips/yo/yo_029.ogg",
+    "truth_text": "Mo ní àǹfààní láti dé Adó Àwáyè.",
+    "is_gold": true
+  },
+  {
+    "id": "yo_030",
+    "lang": "yo",
+    "file": "clips/yo/yo_030.ogg",
+    "truth_text": "Lọ bá mi ra owó sí orí ẹ̀rọ ìbánisọ̀rọ̀ mi.",
+    "is_gold": false
+  },
+  {
+    "id": "yo_031",
+    "lang": "yo",
+    "file": "clips/yo/yo_031.ogg",
+    "truth_text": "Ó ní èyí tóun mú lọ́wọ́ yìí ńkọ́, ṣé k’óun fi sílẹ̀ ni?",
+    "is_gold": false
+  },
+  {
+    "id": "yo_032",
+    "lang": "yo",
+    "file": "clips/yo/yo_032.ogg",
+    "truth_text": "Mo ní kí Òkèjọbí pè mí lórí ẹ̀rọ ìbánisọ̀rọ̀ tó bá di ọ̀la.",
+    "is_gold": false
+  },
+  {
+    "id": "yo_033",
+    "lang": "yo",
+    "file": "clips/yo/yo_033.ogg",
+    "truth_text": "Wọ́n ta ọfà fun jagunjagun náà láyà.",
+    "is_gold": true
+  },
+  {
+    "id": "yo_034",
+    "lang": "yo",
+    "file": "clips/yo/yo_034.ogg",
+    "truth_text": "Ọmọ náà kò m’ará mú, àfi bíi ará oko.",
+    "is_gold": false
+  },
+  {
+    "id": "yo_035",
+    "lang": "yo",
+    "file": "clips/yo/yo_035.ogg",
+    "truth_text": "Akínwùnmí fẹ́ kọ́ bí wọ́n ṣe ń ka ewì.",
+    "is_gold": false
+  },
+  {
+    "id": "yo_036",
+    "lang": "yo",
+    "file": "clips/yo/yo_036.ogg",
+    "truth_text": "Àwọn alápatà jẹ́ àwọn ènìyàn tó máa ń pa ẹran fún títà.",
+    "is_gold": false
+  },
+  {
+    "id": "yo_037",
+    "lang": "yo",
+    "file": "clips/yo/yo_037.ogg",
+    "truth_text": "Mo fẹ́ràn ìsọkúsọ lọ́jọ́ Sátidé.",
+    "is_gold": true
+  },
+  {
+    "id": "yo_038",
+    "lang": "yo",
+    "file": "clips/yo/yo_038.ogg",
+    "truth_text": "Díẹ̀ ni tìẹ níbẹ̀, Abíkẹ́, ọmọ Monífádé, ará ìsokùn.",
+    "is_gold": false
+  },
+  {
+    "id": "yo_039",
+    "lang": "yo",
+    "file": "clips/yo/yo_039.ogg",
+    "truth_text": "Mo dúpẹ́ ore àtìgbàdégbà olúwa.",
+    "is_gold": false
+  },
+  {
+    "id": "yo_040",
+    "lang": "yo",
+    "file": "clips/yo/yo_040.ogg",
+    "truth_text": "Ilé-ifẹ̀ ni ọdún Ifá ti máa ń bẹ̀rẹ̀ káàkiri gbogbo àgbáńlá ayé.",
+    "is_gold": false
+  }
+]

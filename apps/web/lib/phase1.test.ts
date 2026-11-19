@@ -40,7 +40,7 @@ describe("nextClip", () => {
     for (let i = 0; i < QUALIFY_GOLD; i++) {
       const t = await nextClip(db, { pubkey: w.pubkey, lang: "wo", random: () => 0.99 });
       expect(t).not.toBeNull();
-      expect(Object.keys(t!).sort()).toEqual(["audioUrl", "draftText", "durationMs", "id", "lang", "priceSats"]);
+      expect(Object.keys(t!).sort()).toEqual(["audioUrl", "draftSimulated", "draftText", "durationMs", "id", "lang", "priceSats"]);
       expect(JSON.stringify(t)).not.toContain("secret");
       expect(t!.id).toMatch(/^g/);
       const r = await storeCorrection(db, w.correct(t!.id, "x y"));

@@ -23,6 +23,8 @@ export type ClipTask = {
   lang: (typeof LANGS)[number];
   durationMs: number;
   draftText: string;
+  /** True when the draft is a simulated placeholder (no ASR model configured), so the UI can say so. */
+  draftSimulated: boolean;
   priceSats: number;
   audioUrl: string;
 };

@@ -18,6 +18,13 @@ export const GOLD_CER = 0.15;
 export const MIN_GOLD_ACCURACY = 0.7;
 export const DAILY_CAP = 50;
 export const LICENSE = "CC-BY-4.0";
+/**
+ * Licence of a finished transcript. Yoruba seed audio is OpenSLR SLR86 (CC BY-SA 4.0), so transcripts
+ * derived from it must be share-alike. Wolof (Apache-2.0 source) and Pidgin (author's own) are CC-BY-4.0.
+ */
+export function licenseFor(lang: Lang): string {
+  return lang === "yo" ? "CC-BY-SA-4.0" : LICENSE;
+}
 
 /** Judge verdict (Phase 3). Hard flags reject; nothing here can change an amount or recipient. */
 export type JudgeVerdict = {
@@ -83,7 +90,7 @@ export function attestationEvent(o: { clipId: string; lang: Lang; consensusText:
     lang: o.lang,
     consensus_sha256: createHash("sha256").update(o.consensusText.normalize("NFC")).digest("hex"),
     contributors: [...o.contributors].sort(),
-    license: LICENSE,
+    license: licenseFor(o.lang),
   };
   return serverSign(
     { kind: KIND_ATTESTATION, content: JSON.stringify(content), tags: [["d", o.clipId], ["t", "kaddu"]], created_at: Math.floor(o.now.getTime() / 1000) },

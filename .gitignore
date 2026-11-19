@@ -8,3 +8,9 @@ coverage
 !.env.example
 *.tsbuildinfo
 .DS_Store
+# Raw phone recordings stay local; only the converted .ogg clips are committed.
+seed/clips/pcm/*.m4a
+seed/clips/pcm/*.wav
+seed/clips/pcm/*.aac
+seed/clips/pcm/*.caf
+seed/clips/pcm/*.mp3
